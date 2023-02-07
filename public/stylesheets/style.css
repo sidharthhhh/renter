@@ -1,8 +1,52 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+:root {
+  /* Theme colors */
+  --primary: #ef233c;
+  --primaryHover: #cf011a;
+  --secondary: #8d99ae;
+  --fontColor: #2b2d42;
+  --backGroundColor: #edf2f4;
+  --textColor: #f4f4f4;
+  /* Theme colors */
 }
 
-a {
-  color: #00B7FF;
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+::selection {
+  background-color: var(--primary);
+  color: var(--textColor);
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--backGroundColor);
+}
+#main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  caret-color: var(--primary);
+}
+input:focus {
+  box-shadow: 0 0 2px 4px rgba(255, 0, 0, 0.356) !important;
+}
+input[type="range"]:focus {
+  box-shadow: none !important;
+}
+.btn-primary {
+  background-color: var(--primary);
+  border: var(--primary);
+  box-shadow: none !important;
+  color: var(--textColor) !important;
+}
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: var(--primaryHover) !important;
 }

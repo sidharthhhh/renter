@@ -1,0 +1,21 @@
+#searchSection {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--backGroundColor);
+  position: relative;
+}
+#searchSection #searchForm {
+  width: 70vw;
+  max-width: 900px;
+}
+#searchSection .bottomImage {
+  height: 400px;
+  width: 100vw;
+  object-fit: cover;
+  object-position: bottom;
+  position: absolute;
+  bottom: 0%;
+  pointer-events: none;
+}
+
+
