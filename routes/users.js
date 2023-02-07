@@ -1,9 +1,33 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const mongoose = require("mongoose");
+const plm  = require("passport-local-mongoose");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+mongoose.connect("mongodb://localhost/renter");
+
+var userSchema = mongoose.Schema({
+  name: String,
+  userName:String,
+  //user is rental (renting some property)
+  isRental:Boolean,
+  contact: Number,
+  profileImg:String,
+  profileDescription: String,
+  address:{
+    type:String,
+    default:""
+  },
+  properties:[{
+    type:mongoose.Types.ObjectId,
+    ref:Properties
+  }],
+  idProof:{
+    type:{
+      idType:String,
+      idNumber:String // pancard no. contains character
+    }
+  }
 });
 
-module.exports = router;
+userSchema.plugin(plm);
+module.exports = mongoose.model("user" , userSchema);
