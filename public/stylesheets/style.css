@@ -12,12 +12,12 @@
 }
 :root {
   /* Theme colors */
-  --primary: #ef233c;
-  --primaryHover: #cf011a;
+  --primary: #000000;
+  --primaryHover: #2f2f2f;
   --secondary: #8d99ae;
-  --fontColor: #2b2d42;
-  --backGroundColor: #edf2f4;
-  --textColor: #f4f4f4;
+  --fontColor: #d4d4d4;
+  --backGroundColor: #8b8b8b;
+  --textColor: #e3e3e3;
   /* Theme colors */
 }
 
@@ -45,7 +45,7 @@ canvas {
 }
 #main {
   position: relative;
-  overflow: hidden;
+  
 }
 input {
   caret-color: var(--primary);
