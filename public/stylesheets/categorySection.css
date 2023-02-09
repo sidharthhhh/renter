@@ -16,3 +16,22 @@
   width: 110vw;
   object-fit: cover;
 }
+
+/* ------responsive section of category section---------- */
+@media screen and (max-width:  1024px){
+    
+  #categorySection>div{
+    height: 786px;
+    width: 1024px;
+  }
+
+}
+@media screen and (max-width:  600px){
+   
+  #categorySection>div{
+    height: 360px;
+    width: 740px;
+  }
+
+  
+}
