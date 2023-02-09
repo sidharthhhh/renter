@@ -1,0 +1,18 @@
+#categorySection {
+  width: 100%;
+}
+#categorySection > div {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#categorySection div img {
+  position: absolute;
+  left: 0%;
+  bottom: 0%;
+  transform: translate(-50%, 0%);
+  height: 125vh;
+  width: 110vw;
+  object-fit: cover;
+}

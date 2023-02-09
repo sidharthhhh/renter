@@ -1,6 +1,7 @@
 #searchSection {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
+  overflow: hidden;
   background-color: var(--backGroundColor);
   position: relative;
 }
@@ -17,5 +18,3 @@
   bottom: 0%;
   pointer-events: none;
 }
-
-
