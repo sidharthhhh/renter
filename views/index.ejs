@@ -36,11 +36,20 @@
   <body>
     <div id="main">
       <!-- Hero section here -->
-      <canvas class="webgl"></canvas>
+      <!-- <canvas class="webgl"></canvas> -->
+
       <!-- Hero section here -->
 
       <!-- Search box section  -->
-      <%- include('./components/index/searchSection.ejs') %>
+      <section
+        id="searchSection"
+        class="d-flex justify-content-center align-items-center"
+      >
+        <input type="text" placeholder="Enter location" />
+        <button class="d-flex justify-content-center align-items-center gap-1"
+          >Search <i class="ri-search-line"></i>
+        </button>
+      </section>
       <!-- Search box section  -->
 
       <!-- Category Section -->
@@ -90,9 +99,15 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../javascripts/categorySection.js"></script>
+<<<<<<< HEAD
     <script src="../javascripts/moreCategorySection.js"></script>
 
     <script src="dist/bundle.js"></script>
     <script type="module" src="../javascripts/index.js"></script>
+=======
+    <!-- <script src="dist/bundle.js"></script>
+    <script type="module" src="../javascripts/index.js"></script> -->
+    <script type="module" src="../javascripts/searchSection.js"></script>
+>>>>>>> 2f05ac1abdb8e4892e049006e0deb589337d631c
   </body>
 </html>
