@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../stylesheets/style.css" />
     <link rel="stylesheet" href="../stylesheets/searchSection.css" />
     <link rel="stylesheet" href="../stylesheets/categorySection.css" />
+    <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
   </head>
   <body>
     <div id="main">
@@ -54,6 +55,7 @@
       <!-- Category Section -->
       <%- include('./components/index/categorySection.ejs') %>
       <!-- Category Section -->
+      <%- include('./components/index/moreCategorySection.ejs') %>
 
       <!-- Footer here -->
     </div>
@@ -95,9 +97,17 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../javascripts/categorySection.js"></script>
+<<<<<<< HEAD
+    <script src="../javascripts/moreCategorySection.js"></script>
+
+    <script src="dist/bundle.js"></script>
+    <script type="module" src="../javascripts/index.js"></script>
+=======
     <!-- <script src="dist/bundle.js"></script>
     <script type="module" src="../javascripts/index.js"></script> -->
     <script type="module" src="../javascripts/searchSection.js"></script>
+>>>>>>> 2f05ac1abdb8e4892e049006e0deb589337d631c
   </body>
 </html>
