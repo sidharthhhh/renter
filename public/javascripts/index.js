@@ -6,8 +6,8 @@ let width = window.innerWidth
 let height = window.innerHeight
 
 // lights
-const light1 = new THREE.PointLight(0xbbbbbb, 2.5)
-var movingLight = new THREE.PointLight(0xff7700, 5, 130, 50)
+const light1 = new THREE.HemisphereLight(0xffffff, 0x000000, 1.5)
+var movingLight = new THREE.PointLight(0xff7700, 1, 130, 50)
 light1.position.set(0, 10, 0)
 scene.add(movingLight)
 scene.add(light1)
@@ -45,31 +45,14 @@ renderer.shadowMap.type = THREE.BasicShadowMap
 const loader = new GLTFLoader()
 loader.load('../export.gltf', (gltf) => {
   const model = gltf.scene
-  model.scale.set(3.5, 3.5, 3.5)
+  model.scale.set(4, 4, 4)
   const box = new THREE.Box3().setFromObject(model)
   const center = new THREE.Vector3()
   box.getCenter(center)
   model.position.sub(center)
-  model.position.y = -3
+  // model.position.y = -3
   camera.lookAt(center)
   scene.add(model)
-
-  // Set up shadow properties for the PointLight
-  movingLight.castShadow = true
-  movingLight.shadow.mapSize.width = 512
-  movingLight.shadow.mapSize.height = 512
-
-  // Set the receiveShadow property to true for the model
-  model.traverse(function (node) {
-    console.log(node.isMesh)
-    if (node.isMesh) {
-      node.receiveShadow = true
-    }
-  })
-
-  // Set up the renderer to support shadows
-  renderer.shadowMap.enabled = true
-  renderer.shadowMap.type = THREE.BasicShadowMap
 })
 
 // Controls

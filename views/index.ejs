@@ -35,11 +35,20 @@
   <body>
     <div id="main">
       <!-- Hero section here -->
-      <canvas class="webgl"></canvas>
+      <!-- <canvas class="webgl"></canvas> -->
+
       <!-- Hero section here -->
 
       <!-- Search box section  -->
-      <%- include('./components/index/searchSection.ejs') %>
+      <section
+        id="searchSection"
+        class="d-flex justify-content-center align-items-center"
+      >
+        <input type="text" placeholder="Enter location" />
+        <button class="d-flex justify-content-center align-items-center gap-1"
+          >Search <i class="ri-search-line"></i>
+        </button>
+      </section>
       <!-- Search box section  -->
 
       <!-- Category Section -->
@@ -87,7 +96,8 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="../javascripts/categorySection.js"></script>
-    <script src="dist/bundle.js"></script>
-    <script type="module" src="../javascripts/index.js"></script>
+    <!-- <script src="dist/bundle.js"></script>
+    <script type="module" src="../javascripts/index.js"></script> -->
+    <script type="module" src="../javascripts/searchSection.js"></script>
   </body>
 </html>
