@@ -26,8 +26,11 @@ userModel.register(userDets , req.body.password)
   });
 });
 });
+router.get('/signup' , function(req,res){
+  res.render("signup")
+})
 
-router.post('/loginpage', function(req, res, next) {
+router.get('/login', function(req, res, next) {
    res.render('login');
 });
 
