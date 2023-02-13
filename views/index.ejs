@@ -34,12 +34,26 @@
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
   </head>
   <body>
+    <div class="dummyCover" style="height: 500vh; width: 100vw">
+      <div
+        class="dummy position-sticky"
+        style="height: 400vh; width: 100vw; top: 0%"
+      >
+        <!-- Hero section here -->
+        <canvas id="canvas"></canvas>
+        <!-- Hero section here -->
+        <div class="videoCover">
+          <video
+            src="../videos/video-desktop2.mp4"
+            autoplay="autoplay"
+            muted
+            loop
+            class="realVideo"
+          ></video>
+        </div>
+      </div>
+    </div>
     <div id="main">
-      <!-- Hero section here -->
-      <!-- <canvas class="webgl"></canvas> -->
-
-      <!-- Hero section here -->
-
       <!-- Search box section  -->
       <section
         id="searchSection"
@@ -53,7 +67,7 @@
       <!-- Search box section  -->
 
       <!-- Category Section -->
-      <%- include('./components/index/categorySection.ejs') %>
+      <!-- <%- include('./components/index/categorySection.ejs') %> -->
       <!-- Category Section -->
       <%- include('./components/index/moreCategorySection.ejs') %>
 
@@ -99,15 +113,9 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../javascripts/categorySection.js"></script>
-<<<<<<< HEAD
     <script src="../javascripts/moreCategorySection.js"></script>
 
-    <script src="dist/bundle.js"></script>
     <script type="module" src="../javascripts/index.js"></script>
-=======
-    <!-- <script src="dist/bundle.js"></script>
-    <script type="module" src="../javascripts/index.js"></script> -->
     <script type="module" src="../javascripts/searchSection.js"></script>
->>>>>>> 2f05ac1abdb8e4892e049006e0deb589337d631c
   </body>
 </html>

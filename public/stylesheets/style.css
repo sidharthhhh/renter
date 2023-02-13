@@ -41,11 +41,11 @@ body {
   background-color: var(--backGroundColor);
 }
 canvas {
-  background-color: red;
+  position: sticky;
+  top: 0%;
 }
 #main {
   position: relative;
-  
 }
 input {
   caret-color: var(--primary);
@@ -66,4 +66,22 @@ input[type="range"]:focus {
 .btn-primary:focus,
 .btn-primary:hover {
   background-color: var(--primaryHover) !important;
+}
+
+.videoCover {
+  width: 100vw;
+  height: 0vh;
+  overflow: hidden;
+  position: sticky;
+  top: 0%;
+  z-index: 9999999999;
+  transform-origin: bottom;
+}
+.realVideo {
+  /* position: absolute; */
+  z-index: 99999;
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  object-position: center;
 }

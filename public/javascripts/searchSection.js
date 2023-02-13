@@ -18,15 +18,19 @@ var prevY = 0
 document.querySelector('#searchSection').onmousemove = (event) => {
   var x = event.clientX
   var y = event.clientY
-  if (new Date().getTime() > time + 100) {
-    time = new Date().getTime()
+  if (Math.abs(x - prevX) > 80 || Math.abs(y - prevY) > 80) {
+    prevX = x
+    prevY = y
+
     var newImage = document.createElement('img')
-    var tempArr = `${document.querySelector('#main').style.transform}`.split(
-      ',',
-    )
-    var tempY = tempArr[tempArr.length - 3]
+    // var tempArr = `${document.querySelector('#main').style.transform}`.split(
+    //   ',',
+    // )
+    var tempY = searchSection.getBoundingClientRect().y
     newImage.src = images[i++ % 7]
-    newImage.style.top = `${Math.abs(tempY) + y}px`
+    console.log(tempY, y)
+    newImage.style.top = `${y}px`
+    console.log(newImage.style.top)
     newImage.style.left = `${x}px`
     searchSection.appendChild(newImage)
     setTimeout(() => {
@@ -38,7 +42,7 @@ document.querySelector('#searchSection').onmousemove = (event) => {
     document.querySelectorAll('#searchSection img').forEach((elem) => {
       elem.style.top = `${
         elem.getBoundingClientRect().y +
-        (-elem.getBoundingClientRect().y + tempY + prevY) / 5
+        (-elem.getBoundingClientRect().y + prevY) / 5
       }px`
       elem.style.left = `${
         elem.getBoundingClientRect().x +
@@ -46,9 +50,9 @@ document.querySelector('#searchSection').onmousemove = (event) => {
       }px`
     })
   }
-  if (new Date().getTime() > prevTime + 10) {
-    prevTime = new Date().getTime()
-    prevX = x
-    prevY = y
-  }
+  // if (new Date().getTime() > prevTime + 10) {
+  //   prevTime = new Date().getTime()
+  //   prevX = x
+  //   prevY = y
+  // }
 }
