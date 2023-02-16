@@ -1,21 +1,30 @@
-<Section
+<section
   id="searchSection"
-  class="d-flex justify-content-center align-items-center"
+  class="d-flex flex-column justify-content-center align-items-center gap-5"
 >
-  <form id="searchForm" action="/search" method="post" class="d-flex gap-2">
+  <i
+    id="searchShowButton"
+    class="ri-search-line text-light"
+    style="
+      position: absolute;
+      top: 10vh;
+      left: 93vw;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    "
+  ></i>
+  <div class="text d-flex flex-column justify-content-center">
+    <h1>SEARCH</h1>
+    <h1 style="text-align: right">FOR</h1>
+    <h1 class="text-center">RENTALS</h1>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
     <input
-      name="location"
-      class="form-control"
-      placeholder="Search for City, Neighborhood, Zip, County, School"
       type="text"
-    />
-    <input
-      name="location"
-      class="form-range"
       placeholder="Search for City, Neighborhood, Zip, County, School"
-      type="range"
     />
-    <input type="submit" class="form-control btn btn-primary" />
-  </form>
-  <img class="bottomImage" src="../images/searchBottom.svg" alt="" />
-</Section>
+    <button class="d-flex justify-content-center align-items-center gap-1"
+      >Search <i class="ri-search-line"></i>
+    </button>
+  </div>
+</section>

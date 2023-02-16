@@ -16,7 +16,7 @@
   --primaryHover: #2f2f2f;
   --secondary: #8d99ae;
   --fontColor: #d4d4d4;
-  --backGroundColor: #8b8b8b;
+  --backGroundColor: #ffffff;
   --textColor: #e3e3e3;
   /* Theme colors */
 }
@@ -27,7 +27,7 @@
   box-sizing: border-box;
 }
 ::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
 ::selection {
   background-color: var(--primary);
@@ -41,11 +41,13 @@ body {
   background-color: var(--backGroundColor);
 }
 canvas {
-  background-color: red;
+  position: sticky;
+  top: 40%;
 }
 #main {
+  width: 100%;
+  overflow: hidden;
   position: relative;
-  
 }
 input {
   caret-color: var(--primary);
@@ -66,4 +68,46 @@ input[type="range"]:focus {
 .btn-primary:focus,
 .btn-primary:hover {
   background-color: var(--primaryHover) !important;
+}
+
+.videoCover {
+  width: 100vw;
+  height: 0vh;
+  overflow: hidden;
+  position: sticky;
+  top: 0%;
+  z-index: 9999999999;
+  transform-origin: bottom;
+}
+.realVideo {
+  /* position: absolute; */
+  z-index: 99999;
+  height: 100vh;
+  width: 100vw;
+  object-fit: cover;
+  object-position: center;
+}
+.heroSectionText {
+  padding-top: 20vh;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 9999999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* background-color: rgba(255, 0, 0, 0.342); */
+}
+.heroSectionText h1 {
+  color: rgb(68, 70, 69);
+  display: flex;
+  justify-content: space-between;
+  width: 36rem;
+}
+.heroSectionText h1 .bigChar {
+  line-height: 7rem;
+  font-size: 10rem;
 }

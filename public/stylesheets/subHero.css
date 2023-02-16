@@ -1,0 +1,48 @@
+#subHero {
+  width: 100vw;
+  overflow: hidden;
+  height: 120vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 100000vh;
+}
+.images {
+  perspective: 100000vh;
+  display: flex;
+  flex-direction: column;
+  flex-flow: row wrap;
+  gap: 5px;
+  width: 200%;
+  position: absolute;
+  transform: translate(-50%, -50%) translateZ(-90000vh) scale(0);
+  left: 50%;
+  top: 50%;
+  align-items: center;
+  transform-origin: center;
+  clip-path: circle(200% at 0% 0%);
+}
+#subHero::-webkit-scrollbar {
+  display: none;
+}
+.images img {
+  transform-origin: center;
+  user-select: none;
+  -webkit-user-select: none;
+  flex: auto;
+  height: 300px;
+  min-width: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 1;
+  scale: 0;
+  transform: translateZ(-90000vh);
+  transition: scale 2s cubic-bezier(0.62, 0.03, 0.38, 0.99);
+}
+
+@media screen and (max-width: 600px) {
+  .images {
+    gap: 10px;
+  }
+}

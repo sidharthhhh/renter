@@ -1,4 +1,4 @@
-var images = [
+let images = [
   '../images/cursor/1-SDK_NieuwBergen_AfterDark_copyrightWAX-3-1-480x600.jpg',
   '../images/cursor/2104_SDK_NieuwBergen_Hypotenuse_Rouge-480x600.jpg',
   '../images/cursor/2105_SDK_NieuwBergen_NoMorningNoGlory_Violet-480x600.jpg',
@@ -7,26 +7,28 @@ var images = [
   '../images/cursor/SDK_NieuwBergen_Eden_copyrightWAX-480x600.jpg',
   '../images/cursor/SDK_NieuwBergen_Gateway_copyrightWAX-2-1-480x600.jpg',
 ]
-var i = 0
-var time = 0
-var prevTime = 0
-var flag = 0
-var cursor = document.querySelector('#cursor')
-var searchSection = document.querySelector('#searchSection')
-var prevX = 0
-var prevY = 0
+let i = 0
+let time = 0
+let prevTime = 0
+let flag = 0
+let cursor = document.querySelector('#cursor')
+let searchSection = document.querySelector('#searchSection')
+let prevX = 0
+let prevY = 0
 document.querySelector('#searchSection').onmousemove = (event) => {
-  var x = event.clientX
-  var y = event.clientY
-  if (new Date().getTime() > time + 100) {
-    time = new Date().getTime()
-    var newImage = document.createElement('img')
-    var tempArr = `${document.querySelector('#main').style.transform}`.split(
-      ',',
-    )
-    var tempY = tempArr[tempArr.length - 3]
+  let x = event.clientX
+  let y = event.clientY
+  if (Math.abs(x - prevX) > 80 || Math.abs(y - prevY) > 80) {
+    prevX = x
+    prevY = y
+
+    let newImage = document.createElement('img')
+    // let tempArr = `${document.querySelector('#main').style.transform}`.split(
+    //   ',',
+    // )
+    let tempY = searchSection.getBoundingClientRect().y
     newImage.src = images[i++ % 7]
-    newImage.style.top = `${Math.abs(tempY) + y}px`
+    newImage.style.top = `${y}px`
     newImage.style.left = `${x}px`
     searchSection.appendChild(newImage)
     setTimeout(() => {
@@ -38,7 +40,7 @@ document.querySelector('#searchSection').onmousemove = (event) => {
     document.querySelectorAll('#searchSection img').forEach((elem) => {
       elem.style.top = `${
         elem.getBoundingClientRect().y +
-        (-elem.getBoundingClientRect().y + tempY + prevY) / 5
+        (-elem.getBoundingClientRect().y + prevY) / 5
       }px`
       elem.style.left = `${
         elem.getBoundingClientRect().x +
@@ -46,9 +48,35 @@ document.querySelector('#searchSection').onmousemove = (event) => {
       }px`
     })
   }
-  if (new Date().getTime() > prevTime + 10) {
-    prevTime = new Date().getTime()
-    prevX = x
-    prevY = y
-  }
 }
+
+function searchSectionTextAnimation() {
+  $('#searchSection .text h1').textillate({
+    minDisplayTime: 5000,
+    initialDelay: 0, // set the initial delay to 0
+    autoStart: true,
+    in: { effect: 'fadeInDownBig', delay: 1, delayScale: 15 },
+  })
+}
+searchSectionTextAnimation()
+var showFlag = true
+document
+  .querySelector('#searchShowButton')
+  .addEventListener('click', (event) => {
+    if (showFlag)
+      gsap.to('#searchSection', {
+        clipPath: 'circle(100% at 50% 50%)',
+        duration: 0.7,
+        ease: 'cubic-bezier(.55,.21,0,.87)',
+      })
+    else {
+      gsap.to('#searchSection', {
+        clipPath: 'circle(2% at 93% 10%)',
+        duration: 0.7,
+        ease: 'cubic-bezier(.55,.21,0,.87)',
+      })
+    }
+    showFlag = !showFlag
+    // document.querySelector('#searchSection').style.clipPath =
+    //   'circle(200% at 93% 10%)'
+  })
