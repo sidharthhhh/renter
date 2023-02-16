@@ -7,7 +7,11 @@ mongoose.connect('mongodb://0.0.0.0/renter')
 
 var userSchema = mongoose.Schema({
   name: String,
-  userName: String,
+  username: {
+    type: String,
+    required:true,
+    unique:true
+    },
   //user is rental (renting some property)
   isRental: Boolean,
   contact: Number,
@@ -25,10 +29,12 @@ var userSchema = mongoose.Schema({
   ],
   idProof: {
     type: {
-      idType: String,
-      idNumber: String, // pancard no. contains character
+      // idType: String,
+      // idNumber: String, // pancard no. contains character
+      type:Object
     },
   },
+  password:String
 })
 
 userSchema.plugin(plm)

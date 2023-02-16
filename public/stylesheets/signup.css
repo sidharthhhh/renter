@@ -1,0 +1,77 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html ,body{
+    height: 100vh;
+    width: 100%;
+}
+
+.signup{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+  margin: 0%
+}
+
+.signup #left{
+    width: 50%;
+    height: 100vh;
+    /* background-color: red; */
+    padding: 5vw;
+}
+
+.card{
+    border: none;
+    outline: none;
+}
+.top-part{
+    display: flex;
+    align-items: center;
+    padding: 0% 11vw;
+    gap: 5px;
+}
+
+#left .top-part img{
+    max-width: 60px;
+    max-height: 60px;
+}
+.signup #right{
+    width: 50%;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YnVpbGRpbmdzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=2000&q=60");
+    background-position: center;
+    background-size: cover;
+}
+
+.content-part{
+    padding: 2vw;
+    padding-bottom: 3px;
+}
+#left .card small{
+    text-align: center;
+    font-weight: 400;
+}
+
+button{
+    width: 100%;
+    background-color: #FF7101 !important;
+    color: #fff !important;
+}
+
+small a{
+    color: #000;
+}
+
+.newaccount{
+    text-align: left;
+}
+
+.down{
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
