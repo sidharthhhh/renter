@@ -44,6 +44,11 @@ canvas {
   position: sticky;
   top: 40%;
 }
+.navbar {
+  position: fixed;
+  top: 0%;
+  z-index: 999999999999;
+}
 #main {
   width: 100%;
   overflow: hidden;
