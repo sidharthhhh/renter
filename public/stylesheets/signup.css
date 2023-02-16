@@ -57,8 +57,21 @@ html ,body{
 
 button{
     width: 100%;
+    background-color: #FF7101 !important;
+    color: #fff !important;
 }
 
 small a{
     color: #000;
+}
+
+.newaccount{
+    text-align: left;
+}
+
+.down{
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

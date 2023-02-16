@@ -29,8 +29,9 @@ var userSchema = mongoose.Schema({
   ],
   idProof: {
     type: {
-      idType: String,
-      idNumber: String, // pancard no. contains character
+      // idType: String,
+      // idNumber: String, // pancard no. contains character
+      type:Object
     },
   },
   password:String
