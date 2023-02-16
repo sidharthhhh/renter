@@ -17,11 +17,8 @@
       href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
     />
     <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css"
-      integrity="sha512-phGxLIsvHFArdI7IyLjv14dchvbVkEDaH95efvAae/y2exeWBQCQDpNFbOTdV1p4/pIa/XtbuDCnfhDEIXhvGQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
@@ -32,16 +29,33 @@
     <link rel="stylesheet" href="../stylesheets/searchSection.css" />
     <link rel="stylesheet" href="../stylesheets/categorySection.css" />
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
+    <link rel="stylesheet" href="../stylesheets/subHero.css" />
   </head>
   <body>
-    <div class="dummyCover" style="height: 500vh; width: 100vw">
+    <!-- Hero section here -->
+    <div class="heroSectionText text-center">
+      <div>
+        <h1 class="text-capitalize" style="letter-spacing: 1.5rem">
+          <span> DISCOVER </span> <span> YOUR </span>
+        </h1>
+        <h1>
+          <span class="bigChar">S</span>
+          <span class="bigChar">P</span>
+          <span class="bigChar">A</span>
+          <span class="bigChar">C</span>
+          <span class="bigChar">E</span>
+        </h1>
+      </div>
+    </div>
+    <div
+      class="dummyCover"
+      style="height: 500vh; width: 100vw; margin-bottom: 20vh"
+    >
       <div
         class="dummy position-sticky"
         style="height: 400vh; width: 100vw; top: 0%"
       >
-        <!-- Hero section here -->
         <canvas id="canvas"></canvas>
-        <!-- Hero section here -->
         <div class="videoCover">
           <video
             src="../videos/video-desktop2.mp4"
@@ -53,23 +67,22 @@
         </div>
       </div>
     </div>
+    <!-- Hero section here -->
     <div id="main">
-      <!-- Search box section  -->
-      <section
-        id="searchSection"
-        class="d-flex justify-content-center align-items-center"
-      >
-        <input type="text" placeholder="Enter location" />
-        <button class="d-flex justify-content-center align-items-center gap-1"
-          >Search <i class="ri-search-line"></i>
-        </button>
+      <!-- Sub hero section here -->
+      <section id="subHero">
+        <h1 id="subHeroText" style="font-size: 10rem">Renter</h1>
+        <div class="images"> </div>
       </section>
+      <!-- Sub hero section here -->
+      <!-- Search box section  -->
+      <%- include('./components/index/searchSection.ejs') %>
       <!-- Search box section  -->
 
       <!-- Category Section -->
       <!-- <%- include('./components/index/categorySection.ejs') %> -->
-      <!-- Category Section -->
       <%- include('./components/index/moreCategorySection.ejs') %>
+      <!-- Category Section -->
 
       <!-- Footer here -->
     </div>
@@ -116,6 +129,7 @@
     <script src="../javascripts/moreCategorySection.js"></script>
 
     <script type="module" src="../javascripts/index.js"></script>
-    <script type="module" src="../javascripts/searchSection.js"></script>
+    <script src="../javascripts/subHero.js"></script>
+    <script src="../javascripts/searchSection.js"></script>
   </body>
 </html>

@@ -1,10 +1,35 @@
+@font-face {
+  font-family: "Saol Display Regular";
+  src: url("./searchBox.ttf");
+}
 #searchSection {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: rgb(188, 188, 188);
-  position: relative;
+  background-color: rgb(32, 32, 32);
+  position: fixed;
+  top: 0%;
+  padding-bottom: 10vh;
+  font-family: "Saol Display Regular";
+  z-index: 99999999999;
+  clip-path: circle(2% at 93% 10%);
+  /* transition: all 2s cubic-bezier(0.23, 1, 0.320, 1); */
+}
+#searchSection .text {
+  display: flex;
+  flex-direction: column;
+  z-index: 99999;
+  width: 47rem;
+}
+#searchSection .text h1 {
+  color: #ffffffff;
+  line-height: 6rem;
+  font-size: 8rem;
+  height: 6.5rem;
   overflow: hidden;
+}
+#searchSection .text h1 span {
+  transition: all 10s cubic-bezier(0.23, 1, 0.32, 1);
 }
 #searchSection #searchForm {
   width: 70vw;

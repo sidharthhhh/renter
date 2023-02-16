@@ -111,6 +111,15 @@ for (let i = 0; i < frameCount; i++) {
   images.push(img)
 }
 
+gsap.to(canvas, {
+  top: 0,
+  scrollTrigger: {
+    start: 'top 0%',
+    end: 'bottom -40%',
+    scrub: 1,
+    markers: true,
+  },
+})
 gsap.to(imageSeq, {
   frame: frameCount - 1,
   snap: 'frame',

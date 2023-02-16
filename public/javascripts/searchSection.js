@@ -1,4 +1,4 @@
-var images = [
+let images = [
   '../images/cursor/1-SDK_NieuwBergen_AfterDark_copyrightWAX-3-1-480x600.jpg',
   '../images/cursor/2104_SDK_NieuwBergen_Hypotenuse_Rouge-480x600.jpg',
   '../images/cursor/2105_SDK_NieuwBergen_NoMorningNoGlory_Violet-480x600.jpg',
@@ -7,30 +7,28 @@ var images = [
   '../images/cursor/SDK_NieuwBergen_Eden_copyrightWAX-480x600.jpg',
   '../images/cursor/SDK_NieuwBergen_Gateway_copyrightWAX-2-1-480x600.jpg',
 ]
-var i = 0
-var time = 0
-var prevTime = 0
-var flag = 0
-var cursor = document.querySelector('#cursor')
-var searchSection = document.querySelector('#searchSection')
-var prevX = 0
-var prevY = 0
+let i = 0
+let time = 0
+let prevTime = 0
+let flag = 0
+let cursor = document.querySelector('#cursor')
+let searchSection = document.querySelector('#searchSection')
+let prevX = 0
+let prevY = 0
 document.querySelector('#searchSection').onmousemove = (event) => {
-  var x = event.clientX
-  var y = event.clientY
+  let x = event.clientX
+  let y = event.clientY
   if (Math.abs(x - prevX) > 80 || Math.abs(y - prevY) > 80) {
     prevX = x
     prevY = y
 
-    var newImage = document.createElement('img')
-    // var tempArr = `${document.querySelector('#main').style.transform}`.split(
+    let newImage = document.createElement('img')
+    // let tempArr = `${document.querySelector('#main').style.transform}`.split(
     //   ',',
     // )
-    var tempY = searchSection.getBoundingClientRect().y
+    let tempY = searchSection.getBoundingClientRect().y
     newImage.src = images[i++ % 7]
-    console.log(tempY, y)
     newImage.style.top = `${y}px`
-    console.log(newImage.style.top)
     newImage.style.left = `${x}px`
     searchSection.appendChild(newImage)
     setTimeout(() => {
@@ -50,9 +48,35 @@ document.querySelector('#searchSection').onmousemove = (event) => {
       }px`
     })
   }
-  // if (new Date().getTime() > prevTime + 10) {
-  //   prevTime = new Date().getTime()
-  //   prevX = x
-  //   prevY = y
-  // }
 }
+
+function searchSectionTextAnimation() {
+  $('#searchSection .text h1').textillate({
+    minDisplayTime: 5000,
+    initialDelay: 0, // set the initial delay to 0
+    autoStart: true,
+    in: { effect: 'fadeInDownBig', delay: 1, delayScale: 15 },
+  })
+}
+searchSectionTextAnimation()
+var showFlag = true
+document
+  .querySelector('#searchShowButton')
+  .addEventListener('click', (event) => {
+    if (showFlag)
+      gsap.to('#searchSection', {
+        clipPath: 'circle(100% at 50% 50%)',
+        duration: 0.7,
+        ease: 'cubic-bezier(.55,.21,0,.87)',
+      })
+    else {
+      gsap.to('#searchSection', {
+        clipPath: 'circle(2% at 93% 10%)',
+        duration: 0.7,
+        ease: 'cubic-bezier(.55,.21,0,.87)',
+      })
+    }
+    showFlag = !showFlag
+    // document.querySelector('#searchSection').style.clipPath =
+    //   'circle(200% at 93% 10%)'
+  })
