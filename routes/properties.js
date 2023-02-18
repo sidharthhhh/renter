@@ -1,65 +1,34 @@
-const mongoose = require('mongoose')
-
+const mongoose = require("mongoose");
+var plm = require("passport-local-mongoose");
 
 var propertiesSchema = mongoose.Schema({
-  ownerId: {
-    type: mongoose.Types.ObjectId,
-    ref: 'user',
-  },
-  propertyDescription: {
-    type: String,
-    default: '',
-  },
-  propertyAddress: {
-    type: String,
-    default: '',
-  },
-  latitudeAndLongitude: {
-    type: {
-      latitude: Number,
-      longitude: Number,
+    ownerId:{
+        type:mongoose.Types.ObjectId,
+        ref:"user"
     },
-  },
-  //monthly price
-  price: Number,
-  addOnAmenities: [
-    {
-      type: String,
+    propertyDescription:{
+        type:String,
+        default:""
     },
-  ],
-  propertyType: {
-    type: String,
-    default: 'House',
-  },
-  wishlist: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: 'users',
+    propertyAddress:{
+        type:String,
+        default:""
     },
-    
-  ],
-  //accessibilty for disable
-  accessibility: {
-    type: Boolean,
-    default: true,
-  },
-  //nonfurnished,semi-furnished,well-furnished
-  furnishedType: String,
-  reviewAndRatings: [
-    {
-      type: {
-        rating_author: mongoose.Types.ObjectId,
-        ref: 'user',
-        review: String,
-        rating: Number,
-      },
+    latitudeAndLongitude:{
+       direction: {
+            latitude:Number,
+            longitude:Number
+        }
     },
-  ],
-  houseRules: [
-    {
-      type: String,
-    },],
-}
+    //monthly price
+    price:Number,
+    addOnAmenities:[{
+        type:String
+    }],
+    propertyType:{
+        type:String,
+        default:"House"
+    },
     wishlist:[{
         type:mongoose.Types.ObjectId,
         ref:"user"
@@ -101,7 +70,4 @@ var propertiesSchema = mongoose.Schema({
 
 });
 
-
-  )
-
-module.exports = mongoose.model('properties', propertiesSchema)
+module.exports = mongoose.model("Properties" , propertiesSchema);
