@@ -25,4 +25,4 @@ function locoTrigger() {
   ScrollTrigger.addEventListener('refresh', () => locoScroll.update())
   ScrollTrigger.refresh()
 }
-locoTrigger()
+// locoTrigger()
