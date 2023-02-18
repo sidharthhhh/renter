@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport')
 const userModel  = require('./users.js')
+const propertiesModel = require('./properties.js')
 const multer = require("multer");
 const config = require("../config/config.js");
 
 /* GET home page. */
 const localStrategy = require("passport-local");
+const properties = require('./properties.js');
 passport.use(new localStrategy(userModel.authenticate()));
 const UserImageUpload = multer({storage:config});
 
@@ -112,6 +114,41 @@ router.post('/verify',isLoggedIn,  UserImageUpload.single('image'), async functi
 
   await userModel.findOneAndUpdate({username:req.session.passport.user},data)
   res.redirect("/profile");
+})
+
+
+//to find products
+router.get('/find/properties' ,isLoggedIn, async function(req,res){
+      var properties = await propertiesModel.find().limit(6);
+      res.send(properties);
+     
+})
+
+router.post('/upload/properties' , isLoggedIn, async function(req,res){
+  var user = userModel.findOne({username: req.session.passport.user});
+  var data={
+    ownerId: user._id,
+    propertyDescription: req.body.propertyDescription,
+    propertyAddress: req.body.propertyAddress,
+    LatitudeAndLongitude:{latitude:"", longitude:""},
+    price:req.body.price,
+    addOnAmenities:req.body.ammenities,
+    propertyType:req.body.type,
+    accessibilty:req.body.accessibility,
+    furnishedType:req.body.furnished,
+    houseRules:req.body.houseRules,
+    bedrooms:req.body.bedrooms,
+    beds:req.body.beds,
+    floor:req.body.floor,
+    status:req.body.status
+  }
+  await propertiesModel.create(data);
+  res.send("You have succesfully uploaded your property");
+})
+//pagination router
+
+router.get('/upload/property' , function(req,res){
+  res.render("property");
 })
 
 module.exports = router;

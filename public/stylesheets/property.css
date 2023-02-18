@@ -1,0 +1,119 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html ,body{
+    height: 100vh;
+    width: 100%;
+}
+
+#main{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.md-cnt{
+    margin-left: 400px;
+}
+.cnt{
+    width: 700px;
+}
+.mf{
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading{
+    font-size: 17px;
+}
+.price{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.price input{
+    border:1px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.house-btn{
+    width: 20%;
+    height: 80px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.property-cnt{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.property-cnt button div img{
+    width: 20px;
+}
+
+.btn-cnt{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+.any{
+    border: 1px solid black;
+    border-radius: 30px;
+    width: 60px;
+    height: 30px;
+    background-color: black;
+    color: #fff;
+}
+
+.no{
+    background-color: #fff;
+    color: black;
+}
+
+.two-cb{
+    display: flex;
+    gap: 150px;
+    align-items: center;
+}
+
+.two-cb-down{
+    gap:110px
+}
+
+.prpty-desc textarea{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.prpty-access, .furnished{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.prpty-access select, .furnished select{
+    width: 80px;
+    border-radius: 10px;
+}
+
+.furnished select{
+    width: 150px;
+}
+
+.address textarea{
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid black;
+    border-radius: 10px;
+}

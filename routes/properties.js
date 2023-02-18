@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var plm = require("passport-local-mongoose");
 
 var propertiesSchema = mongoose.Schema({
     ownerId:{
@@ -14,7 +15,7 @@ var propertiesSchema = mongoose.Schema({
         default:""
     },
     latitudeAndLongitude:{
-       type: {
+       direction: {
             latitude:Number,
             longitude:Number
         }
@@ -29,27 +30,44 @@ var propertiesSchema = mongoose.Schema({
         default:"House"
     },
     wishlist:[{
-        type: mongoose.Types.ObjectId,
-        ref:"users"
+        type:mongoose.Types.ObjectId,
+        ref:"user"
     }],
     //accessibilty for disable
     accessibility:{
         type:Boolean,
-        default:true
+        default:false
     },
     //nonfurnished,semi-furnished,well-furnished
     furnishedType:String,
     reviewAndRatings:[{
-        type:{
-            rating_author:mongoose.Types.ObjectId,
+        rating_author:{
+           type:mongoose.Types.ObjectId,
             ref:"user",
-            review:String,
-            rating:Number
-        }
+        },
+        review:String,
+        rating:Number
     }],
     houseRules:[{
         type:String
-    }]
+    }],
+    bedrooms:{
+        type:Number,
+        default:0
+    },
+    beds:{
+        type:Number,
+        default:0
+    },
+    floor:{
+        type:Number,
+        default:0
+    },
+    status:{
+        type:String,
+        default:"Available"
+    }
+
 });
 
-module.exports = mongoose.model("properties" , propertiesSchema);
+module.exports = mongoose.model("Properties" , propertiesSchema);
