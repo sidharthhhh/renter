@@ -29,13 +29,18 @@
     <link rel="stylesheet" href="../stylesheets/searchSection.css" />
     <link rel="stylesheet" href="../stylesheets/categorySection.css" />
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
+    <link rel="stylesheet" href="../stylesheets/navbar.css" />
     <link rel="stylesheet" href="../stylesheets/subHero.css" />
   </head>
   <body>
+    <!-- navBar -->
+    <%- include('./components/index/navbar.ejs') %>
+    <!-- navBar -->
+
     <!-- Hero section here -->
     <div class="heroSectionText text-center">
       <div>
-        <h1 class="text-capitalize" style="letter-spacing: 1.5rem">
+        <h1 class="text-capitalize" style="letter-spacing: 1.35rem">
           <span> DISCOVER </span> <span> YOUR </span>
         </h1>
         <h1>
@@ -68,13 +73,12 @@
       </div>
     </div>
     <!-- Hero section here -->
+
     <div id="main">
       <!-- Sub hero section here -->
-      <section id="subHero">
-        <h1 id="subHeroText" style="font-size: 10rem">Renter</h1>
-        <div class="images"> </div>
-      </section>
+      <%- include('./components/index/subHero.ejs') %>
       <!-- Sub hero section here -->
+
       <!-- Search box section  -->
       <%- include('./components/index/searchSection.ejs') %>
       <!-- Search box section  -->
@@ -131,5 +135,6 @@
     <script type="module" src="../javascripts/index.js"></script>
     <script src="../javascripts/subHero.js"></script>
     <script src="../javascripts/searchSection.js"></script>
+    <script src="../javascripts/navbar.js"></script>
   </body>
 </html>
