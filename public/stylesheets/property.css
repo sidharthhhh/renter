@@ -1,119 +1,131 @@
-*{
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
+.md-cnt {
+  margin-left: 400px;
+}
+.cnt {
+  width: 700px;
+}
+.mf {
+  display: flex;
+  justify-content: space-between;
+}
+.propertyCreation {
+  user-select: none;
+}
+.heading {
+  font-size: 17px;
+}
+.price {
+  display: flex;
+  gap: 50px;
+  align-items: center;
 }
 
-html ,body{
-    height: 100vh;
-    width: 100%;
+.price input {
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 10px;
 }
 
-#main{
-    height: 100%;
-    width: 100%;
-    position: relative;
+.house-btn {
+  width: 20%;
+  height: 80px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
-.md-cnt{
-    margin-left: 400px;
-}
-.cnt{
-    width: 700px;
-}
-.mf{
-    display: flex;
-    justify-content: space-between;
+.property-cnt {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.heading{
-    font-size: 17px;
-}
-.price{
-    display: flex;
-    gap: 50px;
-    align-items: center;
+.property-cnt button div img {
+  width: 20px;
 }
 
-.price input{
-    border:1px solid black;
-    border-radius: 10px;
-    font-size: 15px;
-    padding: 10px;
+.btn-cnt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.house-btn{
-    width: 20%;
-    height: 80px;
-    background-color: #fff;
-    cursor: pointer;
-    border-radius: 10px;
-    border: 1px solid black;
+.any {
+  border: 1px solid black;
+  border-radius: 30px;
+  width: 60px;
+  height: 30px;
+  background-color: black;
+  color: #fff;
+  pointer-events: none;
 }
 
-.property-cnt{
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.no {
+  pointer-events: none;
+  background-color: #fff;
+  color: black;
 }
 
-.property-cnt button div img{
-    width: 20px;
+.radioWrapper:has(input[type="radio"]:checked) label button {
+  background-color: black !important;
+  color: #fff !important;
+}
+.checkBoxWrapper:has(input:checked) label span {
+  background-color: black !important;
+}
+.checkBoxWrapper label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.checkBoxWrapper label span {
+  color: #fff !important;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 1px solid rgba(0, 0, 0, 0.158);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.two-cb {
+  display: flex;
+  gap: 150px;
+  align-items: center;
 }
 
-.btn-cnt{
-    display: flex;
-    align-items: center;
-    gap:10px;
+.two-cb-down {
+  gap: 110px;
 }
 
-.any{
-    border: 1px solid black;
-    border-radius: 30px;
-    width: 60px;
-    height: 30px;
-    background-color: black;
-    color: #fff;
+.prpty-desc textarea {
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.no{
-    background-color: #fff;
-    color: black;
+.prpty-access,
+.furnished {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.two-cb{
-    display: flex;
-    gap: 150px;
-    align-items: center;
+.prpty-access select,
+.furnished select {
+  width: 80px;
+  border-radius: 10px;
 }
 
-.two-cb-down{
-    gap:110px
+.furnished select {
+  width: 150px;
 }
 
-.prpty-desc textarea{
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.prpty-access, .furnished{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.prpty-access select, .furnished select{
-    width: 80px;
-    border-radius: 10px;
-}
-
-.furnished select{
-    width: 150px;
-}
-
-.address textarea{
-    padding: 10px;
-    font-size: 13px;
-    border: 1px solid black;
-    border-radius: 10px;
+.address textarea {
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
