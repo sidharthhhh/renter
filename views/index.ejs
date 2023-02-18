@@ -31,7 +31,52 @@
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
     <link rel="stylesheet" href="../stylesheets/navbar.css" />
     <link rel="stylesheet" href="../stylesheets/subHero.css" />
+    <link rel="stylesheet" href="../stylesheets/textSection.css" />
   </head>
+  <style>
+    #preLoader {
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      background-color: rgb(32, 32, 32);
+      z-index: 999999999999999999999999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Saol Display Regular";
+      color: #e6e6e6;
+      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1),
+        opacity 3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    #preLoader h1 {
+      font-size: 6rem;
+      letter-spacing: 1rem;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+    }
+    #preLoader p span,
+    #preLoader h1 span {
+      opacity: 0;
+      display: inline-block;
+      transition: all 2s cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    #preLoader p {
+      opacity: 0;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0.25rem;
+    }
+    @media only screen and (max-width: 600px) {
+      #preLoader h1 span {
+        font-size: 3rem !important;
+      }
+    }
+  </style>
   <body>
     <!-- navBar -->
     <%- include('./components/index/navbar.ejs') %>
@@ -40,16 +85,10 @@
     <!-- Hero section here -->
     <div class="heroSectionText text-center">
       <div>
-        <h1 class="text-capitalize" style="letter-spacing: 1.35rem">
-          <span> DISCOVER </span> <span> YOUR </span>
-        </h1>
-        <h1>
-          <span class="bigChar">S</span>
-          <span class="bigChar">P</span>
-          <span class="bigChar">A</span>
-          <span class="bigChar">C</span>
-          <span class="bigChar">E</span>
-        </h1>
+        <h1 class="text-capitalize" style="letter-spacing: 1.35rem"
+          >DISCOVER YOUR</h1
+        >
+        <h1 class="bigChar">SPACE</h1>
       </div>
     </div>
     <div
@@ -75,6 +114,16 @@
     <!-- Hero section here -->
 
     <div id="main">
+      <!-- Text section -->
+      <section class="textSection">
+        <div class="text">
+          <h1>Find it</h1>
+          <h1 class="text-center">love it</h1>
+          <h1 style="float: right">rent it</h1>
+        </div>
+      </section>
+      <!-- Text section -->
+
       <!-- Sub hero section here -->
       <%- include('./components/index/subHero.ejs') %>
       <!-- Sub hero section here -->
@@ -83,6 +132,16 @@
       <%- include('./components/index/searchSection.ejs') %>
       <!-- Search box section  -->
 
+      <!-- Text section -->
+      <section class="textSection">
+        <div class="text">
+          <h1>Find it</h1>
+          <h1 class="text-center">love it</h1>
+          <h1 style="float: right">rent it</h1>
+        </div>
+      </section>
+      <!-- Text section -->
+
       <!-- Category Section -->
       <!-- <%- include('./components/index/categorySection.ejs') %> -->
       <%- include('./components/index/moreCategorySection.ejs') %>
@@ -90,6 +149,11 @@
 
       <!-- Footer here -->
     </div>
+
+    <section id="preLoader">
+      <h1>RENTER</h1>
+      <p>Your perfect rental destination</p>
+    </section>
 
     <!-- Bootstrap js CDN -->
     <script
@@ -128,13 +192,77 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script>
+      function spanMaker(element) {
+        var clutter = "";
+        element.textContent.split("").forEach((elem) => {
+          clutter += `<span>${elem}</span>`;
+        });
+        element.innerHTML = clutter;
+      }
+      var heading = document.querySelector("#preLoader h1");
+      var tagLine = document.querySelector("#preLoader p");
+      spanMaker(heading);
+      spanMaker(tagLine);
+      heading.style.opacity = "1";
+      tagLine.style.opacity = "1";
+      document.querySelectorAll("#preLoader p span").forEach((elem) => {
+        elem.style.transform = `translateY(${Math.random() * 50 + 50}px)`;
+      });
+      document.querySelectorAll("#preLoader h1 span").forEach((elem) => {
+        elem.style.transform = `translateY(${Math.random() * 200 + 100}px)`;
+      });
+
+      setTimeout(() => {
+        document.querySelectorAll("#preLoader h1 span").forEach((elem) => {
+          elem.style.transform = `translateY(0px)`;
+          elem.style.opacity = "1";
+        });
+        setTimeout(() => {
+          document.querySelectorAll("#preLoader p span").forEach((elem) => {
+            elem.style.transform = `translateY(0px)`;
+            elem.style.opacity = "1";
+          });
+        }, 500);
+      }, 500);
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.querySelectorAll("#preLoader p span").forEach((elem) => {
+            elem.style.transform = `translateY(-${Math.random() * 50 + 50}px)`;
+          });
+          document.querySelectorAll("#preLoader h1 span").forEach((elem) => {
+            elem.style.transform = `translateY(-${
+              Math.random() * 200 + 100
+            }px)`;
+          });
+          setTimeout(() => {
+            var preloader = document.querySelector("#preLoader");
+            preloader.style.opacity = "0";
+            setTimeout(() => {
+              preloader.style.display = "none";
+              document.querySelectorAll(".heroSectionText h1").forEach((el) => {
+                el.style.display = "flex";
+              });
+              $(".heroSectionText h1").textillate({
+                autoStart: true,
+                in: {
+                  effect: "fadeInUp",
+                  delay: 0,
+                },
+              });
+            }, 900);
+          }, 900);
+        }, 2000);
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../javascripts/categorySection.js"></script>
     <script src="../javascripts/moreCategorySection.js"></script>
-
     <script type="module" src="../javascripts/index.js"></script>
     <script src="../javascripts/subHero.js"></script>
     <script src="../javascripts/searchSection.js"></script>
     <script src="../javascripts/navbar.js"></script>
+    <script src="../javascripts/textSection.js"></script>
   </body>
 </html>

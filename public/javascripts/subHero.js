@@ -24,10 +24,6 @@ function subHeroAnimation() {
       gap: '30px',
       ease: 'cubic-bezier(.55,.21,0,.87)',
     })
-    .to('#subHeroText', {
-      opacity: 1,
-      duration: 1,
-    })
 
   subHeroSectionImages.childNodes.forEach((element) => {
     gsap
@@ -43,6 +39,10 @@ function subHeroAnimation() {
       .delay(Math.random())
   })
   document.querySelector('#subHero').onmousemove = (event) => {
+    gsap.to('#subHeroText', {
+      opacity: 1,
+      duration: 1,
+    })
     subHeroSectionImages.style.transform = `translate(calc(-50% + ${
       (window.innerWidth / 2 - event.clientX) / 10
     }px),calc(-50% + ${

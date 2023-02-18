@@ -93,12 +93,13 @@ function files(index) {
     '../images/hero/ProtohomesAssembling78.jpg',
     '../images/hero/ProtohomesAssembling79.jpg',
     '../images/hero/ProtohomesAssembling80.jpg',
+    '../images/hero/ProtohomesAssembling81.jpg',
     '../videos/video-desktop2.mp4',
   ]
   return data[index]
 }
 
-const frameCount = 80
+const frameCount = 81
 
 const images = []
 const imageSeq = {
@@ -117,7 +118,6 @@ gsap.to(canvas, {
     start: 'top 0%',
     end: 'bottom -40%',
     scrub: 1,
-    markers: true,
   },
 })
 gsap.to(imageSeq, {

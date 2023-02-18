@@ -14,6 +14,7 @@
   z-index: 99999999999;
   clip-path: circle(2% at 93% 10%);
   /* transition: all 2s cubic-bezier(0.23, 1, 0.320, 1); */
+  margin: 0 !important;
 }
 #searchSection .text {
   display: flex;
@@ -45,7 +46,7 @@
   pointer-events: none;
 }
 #searchSection input,
-button {
+#searchSection button {
   width: 30vw;
   padding: 2vh 1vw;
   background-color: rgba(255, 255, 255, 0.082);
@@ -83,4 +84,23 @@ button {
   width: 10vh;
   background-color: red;
   position: fixed;
+}
+@media only screen and (max-width: 600px) {
+  #searchSection .text {
+    width: 90vw;
+    padding: 0 10vw;
+  }
+  #searchSection .text h1 {
+    line-height: 2.5rem;
+    font-size: 2.5rem;
+    height: 2.5rem;
+  }
+  #searchSection input,
+  #searchSection button {
+    width: 60vw;
+    padding: 1.5vh 10px;
+  }
+}
+#searchSection button {
+  width: 30vw;
 }

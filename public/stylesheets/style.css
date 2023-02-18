@@ -54,6 +54,9 @@ canvas {
   overflow: hidden;
   position: relative;
 }
+#main section {
+  margin: 5vh 0;
+}
 input {
   caret-color: var(--primary);
 }
@@ -104,15 +107,52 @@ input[type="range"]:focus {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  overflow: hidden;
   /* background-color: rgba(255, 0, 0, 0.342); */
 }
 .heroSectionText h1 {
   color: rgb(68, 70, 69);
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 36rem;
+  height: fit-content;
+  overflow: hidden;
+  text-align: end;
 }
-.heroSectionText h1 .bigChar {
-  line-height: 7rem;
+.heroSectionText h1 span {
+  display: inline-block;
+}
+.heroSectionText h1 > span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.heroSectionText h1.bigChar {
   font-size: 10rem;
+}
+.bigChar > span > span {
+  width: 100%;
+  display: flex !important;
+  justify-content: space-between;
+}
+.bigChar span {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+  .heroSectionText h1 {
+    width: 90vw;
+  }
+  .heroSectionText h1:not(.bigChar) span span span {
+    width: 1.5rem;
+  }
+  .heroSectionText h1 .word2 span {
+    width: 1.5rem;
+  }
+  .heroSectionText h1 {
+    font-size: 1rem;
+  }
+  .heroSectionText h1.bigChar {
+    font-size: 3rem !important;
+  }
 }
