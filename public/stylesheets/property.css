@@ -1,3 +1,7 @@
+textarea{
+  resize: none;
+}
+
 .md-cnt {
   margin-left: 400px;
 }
@@ -40,6 +44,16 @@
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.property-cnt button:active{
+  background-color:#F0A04B;
+  border: 1px solid #F0A04B;
+}
+
+.property-cnt button:focus{
+  background-color:#F0A04B;
+  border: 1px solid #F0A04B;
 }
 
 .property-cnt button div img {
@@ -116,7 +130,10 @@
 .prpty-access select,
 .furnished select {
   width: 80px;
-  border-radius: 10px;
+  background-color: DodgerBlue;
+  border-radius: 0%;
+  color: #fff;
+  padding: 5px;
 }
 
 .furnished select {

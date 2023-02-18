@@ -85,6 +85,7 @@
                       class="house-btn"
                       value="house"
                       name="proprtyType"
+                      data-clicked = "false"
                     >
                       <div class="house-div">
                         <img
@@ -461,52 +462,98 @@
                           Wifi</label
                         >
                       </div>
-                      <div>
+                      <div class="mb-2 checkBoxWrapper">
                         <input
+                          style="display: none"
                           type="checkbox"
                           id="kitchen"
                           name="ammenities"
                           value="kitchen"
                         />
-                        <label for="kitchen"> Kitchen</label>
+                        <label for="kitchen">
+                          <span class="box">
+                            <span class="check">
+                              <i class="ri-check-line"></i>
+                            </span>
+                          </span>
+                          Kitchen</label
+                        >
                       </div>
                       <div>
-                        <input
-                          type="checkbox"
-                          id="wm"
-                          name="ammenities"
-                          value="Washing Machine"
-                        />
-                        <label for="wm"> Washing Machine</label>
+                        <div class="mb-2 checkBoxWrapper">
+                          <input
+                            style="display: none"
+                            type="checkbox"
+                            id="wm"
+                            name="ammenities"
+                            value="Washing Machine"
+                          />
+                          <label for="wm">
+                            <span class="box">
+                              <span class="check">
+                                <i class="ri-check-line"></i>
+                              </span>
+                            </span>
+                            Washing Machine</label
+                          >
+                        </div>
                       </div>
                     </div>
                     <div class="two-cb two-cb-down">
                       <div>
-                        <input
-                          type="checkbox"
-                          id="parking"
-                          name="ammenities"
-                          value="parking"
-                        />
-                        <label for="parking"> Parking</label>
+                        <div class="mb-2 checkBoxWrapper">
+                          <input
+                            style="display: none"
+                            type="checkbox"
+                            id="parking"
+                            name="ammenities"
+                            value="parking"
+                          />
+                          <label for="parking">
+                            <span class="box">
+                              <span class="check">
+                                <i class="ri-check-line"></i>
+                              </span>
+                            </span>
+                            Parking</label
+                          >
+                        </div>
                       </div>
+                      <div class="mb-2 checkBoxWrapper">
+                          <input
+                            style="display: none"
+                            type="checkbox"
+                            id="ac"
+                            name="ammenities"
+                            value="Air Conditioner"
+                          />
+                          <label for="ac">
+                            <span class="box">
+                              <span class="check">
+                                <i class="ri-check-line"></i>
+                              </span>
+                            </span>
+                            Air Conditioner</label
+                          >
+                        </div>
                       <div>
-                        <input
-                          type="checkbox"
-                          id="ac"
-                          name="ammenities"
-                          value="Air Conditioner"
-                        />
-                        <label for="ac"> Air Conditioner</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="dw"
-                          name="ammenities"
-                          value="Dedicated Workspace"
-                        />
-                        <label for="dw"> Dedicated Workspace</label>
+                        <div class="mb-2 checkBoxWrapper">
+                          <input
+                            style="display: none"
+                            type="checkbox"
+                            id="dw"
+                            name="ammenities"
+                            value="Dedicated Workspace"
+                          />
+                          <label for="dw">
+                            <span class="box">
+                              <span class="check">
+                                <i class="ri-check-line"></i>
+                              </span>
+                            </span>
+                            Dedicated Workspace</label
+                          >
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -606,5 +653,18 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+  <script>
+    document.querySelectorAll(".property-cnt button").forEach(function(btn){
+      btn.addEventListener("onclick" , function(){
+        if(btn.dataset.clicked== "false"){
+          btn.style.backgroundColor = "#F0A04B";
+          btn.dataset.clicked = "true";
+        }else{
+          btn.style.backgroundColor = "#fff";
+          btn.dataset.clicked="false";
+        }
+      })
+    })
+  </script>
   </body>
 </html>
