@@ -49,8 +49,8 @@
             aria-labelledby="staticBackdropLabel"
             aria-hidden="true"
           >
-            <div class="modal-dialog md-cnt">
-              <div class="modal-content cnt">
+            <div class="modal-dialog">
+              <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="staticBackdropLabel"
                     >Upload Your Property</h1
@@ -63,74 +63,98 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <h2 class="heading">Price Range</h2>
-                  <div class="price">
+                  <div class="address">
+                    <h2 class="heading">Property price In INR</h2>
                     <input
-                      type="number"
-                      name="min-price"
+                      class="col-12 form-control"
+                      name="price"
                       id=""
-                      placeholder="min-price"
-                    />
-                    <input
-                      type="number"
-                      name="max-price"
-                      placeholder="max-price"
+                      placeholder="Enter property price"
                     />
                   </div>
                   <hr />
                   <h2 class="heading">Property Type</h2>
                   <div class="property-cnt">
-                    <button
-                      type="button "
-                      class="house-btn"
-                      value="house"
-                      name="proprtyType"
-                    >
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
-                          alt=""
-                        />
-                        <h5>House</h5>
-                      </div>
-                    </button>
-                    <button class="house-btn" value="house" name="proprtyType">
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg"
-                          alt=""
-                        />
-                        <h5>Flat</h5>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      class="house-btn"
-                      value="house"
-                      name="proprtyType"
-                    >
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
-                          alt=""
-                        />
-                        <h5>PG</h5>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      class="house-btn"
-                      value="house"
-                      name="proprtyType"
-                    >
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
-                          alt=""
-                        />
-                        <h5>Guest-House</h5>
-                      </div>
-                    </button>
+                    <div class="radioWrapper">
+                      <label for="t1"
+                        ><button class="house-btn">
+                          <div class="house-div">
+                            <img
+                              src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
+                              alt=""
+                            />
+                            <h5>House</h5>
+                          </div>
+                        </button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="house"
+                        id="t1"
+                        name="proprtyType"
+                      />
+                    </div>
+                    <div class="radioWrapper">
+                      <label for="t2"
+                        ><button class="house-btn">
+                          <div class="house-div">
+                            <img
+                              src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg"
+                              alt=""
+                            />
+                            <h5>Flat</h5>
+                          </div>
+                        </button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="flat"
+                        id="t2"
+                        name="proprtyType"
+                      />
+                    </div>
+                    <div class="radioWrapper">
+                      <label for="t3"
+                        ><button class="house-btn">
+                          <div class="house-div">
+                            <img
+                              src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
+                              alt=""
+                            />
+                            <h5>PG</h5>
+                          </div>
+                        </button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="pg"
+                        id="t3"
+                        name="proprtyType"
+                      />
+                    </div>
+                    <div class="radioWrapper">
+                      <label for="t4"
+                        ><button class="house-btn">
+                          <div class="house-div">
+                            <img
+                              src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
+                              alt=""
+                            />
+                            <h5>Guest-house</h5>
+                          </div>
+                        </button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="Guest-House"
+                        id="t4"
+                        name="proprtyType"
+                      />
+                    </div>
                   </div>
                   <hr />
                   <div class="rooms-bed">
@@ -223,7 +247,7 @@
                         </div>
                         <div class="radioWrapper">
                           <label for="brr7"
-                            ><button class="any no">7</button></label
+                            ><button class="any no">7+</button></label
                           >
                           <input
                             style="display: none"
@@ -441,115 +465,189 @@
                     </div>
                   </div>
                   <hr />
+                  <h2 class="heading">Ammenities</h2>
                   <div class="ammenities">
-                    <h2 class="heading">Ammenities</h2>
-                    <div class="two-cb">
-                      <div class="mb-2 checkBoxWrapper">
-                        <input
-                          style="display: none"
-                          type="checkbox"
-                          id="wifi"
-                          name="ammenities"
-                          value="Wifi"
-                        />
-                        <label for="wifi">
-                          <span class="box">
-                            <span class="check">
-                              <i class="ri-check-line"></i>
-                            </span>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="wifi"
+                        name="ammenities"
+                        value="Wifi"
+                      />
+                      <label for="wifi">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
                           </span>
-                          Wifi</label
-                        >
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="kitchen"
-                          name="ammenities"
-                          value="kitchen"
-                        />
-                        <label for="kitchen"> Kitchen</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="wm"
-                          name="ammenities"
-                          value="Washing Machine"
-                        />
-                        <label for="wm"> Washing Machine</label>
-                      </div>
+                        </span>
+                        Wifi</label
+                      >
                     </div>
-                    <div class="two-cb two-cb-down">
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="parking"
-                          name="ammenities"
-                          value="parking"
-                        />
-                        <label for="parking"> Parking</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="ac"
-                          name="ammenities"
-                          value="Air Conditioner"
-                        />
-                        <label for="ac"> Air Conditioner</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="dw"
-                          name="ammenities"
-                          value="Dedicated Workspace"
-                        />
-                        <label for="dw"> Dedicated Workspace</label>
-                      </div>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="kitchen"
+                        name="ammenities"
+                        value="kitchen"
+                      />
+                      <label for="kitchen">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span>
+                        </span>
+                        Kitchen</label
+                      >
+                    </div>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="wm"
+                        name="ammenities"
+                        value="Washing Machine"
+                      />
+                      <label for="wm">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span>
+                        </span>
+                        Washing Machine</label
+                      >
+                    </div>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="parking"
+                        name="ammenities"
+                        value="parking"
+                      />
+                      <label for="parking">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span>
+                        </span>
+                        Parking</label
+                      >
+                    </div>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="ac"
+                        name="ammenities"
+                        value="Air Conditioner"
+                      />
+                      <label for="ac">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span>
+                        </span>
+                        Air Conditioner</label
+                      >
+                    </div>
+                    <div class="mb-2 checkBoxWrapper">
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="dw"
+                        name="ammenities"
+                        value="Dedicated Workspace"
+                      />
+                      <label for="dw">
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span>
+                        </span>
+                        Dedicated Workspace</label
+                      >
                     </div>
                   </div>
                   <hr />
                   <div class="prpty-desc">
                     <h2 class="heading">Property Description</h2>
                     <textarea
+                      class="col-12"
                       name="propertyDescription"
                       id=""
-                      cols="70"
-                      rows="2"
+                      rows="7"
                       placeholder="Enter Fascinating facts about your property"
                     ></textarea>
                   </div>
                   <hr />
                   <div class="prpty-access">
-                    <label class="form-label" for='accessibility'
-                      >Property Accessible for Specially-abled</label
-                    >
-                    <select name="accessibility" id="accessibility">
-                      <option value="False">False</option>
-                      <option value="True">True</option>
-                    </select>
+                    <div class="mb-2 checkBoxWrapper">
+                      <label class="form-label" for="accessibility"
+                        >Property Accessible for Specially-abled
+                        <span class="box">
+                          <span class="check">
+                            <i class="ri-check-line"></i>
+                          </span> </span
+                      ></label>
+                      <input
+                        style="display: none"
+                        type="checkbox"
+                        id="accessibility"
+                        name="accessibility"
+                      />
+                    </div>
                   </div>
                   <hr />
                   <div class="furnished">
-                    <h2 class="heading">Furnished Type</h2>
-                    <select name="furnished" id="furnished">
-                      <option value="Fully Furnished">Fully Furnished</option>
-                      <option value="Semi Furnished">Semi Furnished</option>
-                      <option value="Non Furnished">Non Furnished</option>
-                    </select>
+                    <label class="form-label">Furnished Type</label>
+                    <div class="radioWrapper">
+                      <label for="fur1"
+                        ><button class="any no">Fully Furnished</button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="Fully Furnished"
+                        id="fur1"
+                        name="furnished"
+                      />
+                    </div>
+                    <div class="radioWrapper">
+                      <label for="fur2"
+                        ><button class="any no">Semi Furnished</button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="Semi Furnished"
+                        id="fur2"
+                        name="furnished"
+                      />
+                    </div>
+                    <div class="radioWrapper">
+                      <label for="fur3"
+                        ><button class="any no">Non Furnished</button></label
+                      >
+                      <input
+                        style="display: none"
+                        type="radio"
+                        value="Non Furnished"
+                        id="fur3"
+                        name="furnished"
+                      />
+                    </div>
                   </div>
                   <hr />
                   <div class="address">
                     <h2 class="heading">Property Address</h2>
-                    <textarea
-                      rows="1"
-                      cols="70"
+                    <input
+                      class="col-12"
                       name="propertyAddress"
                       id=""
                       placeholder="Enter Address"
-                    ></textarea>
+                    />
                   </div>
                 </div>
                 <div class="modal-footer mf">
