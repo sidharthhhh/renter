@@ -4,3 +4,4 @@
                   profile
                   verify
                   success -> after login
+                  findproperties: pagination 6 properties at a time

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+
 var propertiesSchema = mongoose.Schema({
   ownerId: {
     type: mongoose.Types.ObjectId,
@@ -35,6 +36,7 @@ var propertiesSchema = mongoose.Schema({
       type: mongoose.Types.ObjectId,
       ref: 'users',
     },
+    
   ],
   //accessibilty for disable
   accessibility: {
@@ -56,8 +58,50 @@ var propertiesSchema = mongoose.Schema({
   houseRules: [
     {
       type: String,
+    },],
+}
+    wishlist:[{
+        type:mongoose.Types.ObjectId,
+        ref:"user"
+    }],
+    //accessibilty for disable
+    accessibility:{
+        type:Boolean,
+        default:false
     },
-  ],
-})
+    //nonfurnished,semi-furnished,well-furnished
+    furnishedType:String,
+    reviewAndRatings:[{
+        rating_author:{
+           type:mongoose.Types.ObjectId,
+            ref:"user",
+        },
+        review:String,
+        rating:Number
+    }],
+    houseRules:[{
+        type:String
+    }],
+    bedrooms:{
+        type:Number,
+        default:0
+    },
+    beds:{
+        type:Number,
+        default:0
+    },
+    floor:{
+        type:Number,
+        default:0
+    },
+    status:{
+        type:String,
+        default:"Available"
+    }
+
+});
+
+
+  )
 
 module.exports = mongoose.model('properties', propertiesSchema)
