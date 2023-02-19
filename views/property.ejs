@@ -643,21 +643,29 @@
                   <div class="address">
                     <h2 class="heading">Property Address</h2>
                     <input
-                      class="col-12"
+                      class="col-12 form-control"
                       name="propertyAddress"
                       id=""
                       placeholder="Enter Address"
                     />
                   </div>
+                  <hr>
+                  <div class="image">
+                    <div class="mb-3">
+                      <label for="images" class="form-label"
+                        >Choose some property Images</label
+                      >
+                      <input
+                        type="file"
+                        multiple
+                        class="form-control"
+                        id="images"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-footer mf">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                    >Close</button
-                  >
-                  <button type="button" class="btn btn-primary"
+                <div class="modal-footer mf justify-content-end">
+                  <button type="button" class="btn btn-outline-dark"
                     >Upload Property</button
                   >
                 </div>
@@ -704,5 +712,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script src="../javascripts/propertyCreate.js"></script>
   </body>
 </html>

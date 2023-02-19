@@ -32,6 +32,17 @@
   height: 100%;
   width: 83vw;
   align-items: center;
+  overflow: auto;
+}
+.moreCategorySection .category .left::-webkit-scrollbar {
+  display: none !important;
+}
+.moreCategorySection .category .left img {
+  opacity: 0.5;
+}
+.moreCategorySection .category .left small {
+  opacity: 0.8;
+  font-size: 0.7rem;
 }
 .moreCategorySection .category .right {
   display: flex;
@@ -51,13 +62,15 @@
   width: 25vw; */
   min-height: 310px;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.084);
+  border-radius: 15px;
+  cursor: pointer;
 }
 .moreCategorySection .property .fav {
   position: absolute;
   top: 1rem;
   right: 1rem;
   z-index: 99;
-  
 }
 .moreCategorySection .property .propertyImages {
   height: 21vw;
@@ -65,6 +78,8 @@
   min-height: 270px;
   overflow: hidden;
   border-radius: 15px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .moreCategorySection .property .propertyImages img {
   height: 21vw;
