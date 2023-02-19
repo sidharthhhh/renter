@@ -67,7 +67,7 @@
   border-bottom-right-radius: 50px;
   border-top-right-radius: 50px;
   border: 1px solid #ffffff96;
-  width: fit-content;
+  width: 10vw !important;
 }
 #searchSection img {
   z-index: 0;
