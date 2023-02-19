@@ -1,4 +1,4 @@
-let images = [
+let images2 = [
   '../images/cursor/1-SDK_NieuwBergen_AfterDark_copyrightWAX-3-1-480x600.jpg',
   '../images/cursor/2104_SDK_NieuwBergen_Hypotenuse_Rouge-480x600.jpg',
   '../images/cursor/2105_SDK_NieuwBergen_NoMorningNoGlory_Violet-480x600.jpg',
@@ -27,7 +27,7 @@ document.querySelector('#searchSection').onmousemove = (event) => {
     //   ',',
     // )
     let tempY = searchSection.getBoundingClientRect().y
-    newImage.src = images[i++ % 7]
+    newImage.src = images2[i++ % 7]
     newImage.style.top = `${y}px`
     newImage.style.left = `${x}px`
     searchSection.appendChild(newImage)

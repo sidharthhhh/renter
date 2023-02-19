@@ -99,7 +99,7 @@ function files(index) {
   return data[index]
 }
 
-const frameCount = 81
+const frameCount = 82
 
 const images = []
 const imageSeq = {
@@ -127,7 +127,7 @@ gsap.to(imageSeq, {
   scrollTrigger: {
     trigger: '.dummy',
     scrub: 0.5,
-    start: 'bottom 400%',
+    start: 'bottom 300%',
     end: 'bottom 100%',
   },
   onUpdate: render,
