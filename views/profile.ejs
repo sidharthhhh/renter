@@ -657,7 +657,16 @@
       </div>
     </div>
     <div id="main">
-      <div class="container rounded bg-white mt-5 mb-5">
+      <% if(!verified){%>
+        <div class="p-3 bg-danger border border-danger-subtle rounded-3 d-flex justify-content-between"
+        style="color:#dadada">
+        <div>
+          You have not verified your account. Verify it below to access premium
+          services.
+        </div>
+      </div>
+      <%} %>
+      <div class="container rounded bg-white mt-5 mb-3">
         <div class="d-flex justify-content-around">
           <div class="col-md-3">
             <div
@@ -665,12 +674,18 @@
               ><img
                 class="rounded-circle mt-5"
                 width="150px"
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span
+                <% if(data.profileImg){ %>
+                  src = "../images/uploads/userImages/<%= data.profileImg %>"
+                <% } else{%>
+                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                <% } %>
+                />
+                <span
                 class="font-weight-bold"
-                >Edogaru</span
-              ><span class="text-black-50">edogaru@mail.com.my</span
-              ><span> </span
-            ></div>
+                ><%= data.name %> </span>
+              <span class="text-black-50"><%= data.username %></span>
+              <span> </span>
+            </div>
           </div>
           <div
             class="line"
@@ -684,8 +699,7 @@
             <div class="p-3 py-1">
               <div
                 class="d-flex justify-content-between align-items-center experience"
-                ><span>Add new property</span
-                ><button
+                ><span>Add new property</span><button
                   type="button"
                   class="btn btn-outline-dark"
                   data-bs-toggle="modal"
@@ -695,28 +709,22 @@
                 </button> </div
               ><br />
             </div>
+            <form action="/verify" method="post" enctype="multipart/form-data">
             <div class="p-3 py-2">
               <div
-                class="d-flex justify-content-between align-items-center mb-3"
+                class="d-flex justify-content-between align-items-center mb-1"
               >
                 <h4 class="text-right">Profile Settings</h4>
               </div>
               <div class="row mt-2">
-                <div class="col-md-6"
+                <div
                   ><label class="labels">Name</label
                   ><input
                     type="text"
                     class="form-control"
                     placeholder="first name"
-                    value=""
-                /></div>
-                <div class="col-md-6"
-                  ><label class="labels">Surname</label
-                  ><input
-                    type="text"
-                    class="form-control"
-                    value=""
-                    placeholder="surname"
+                    value="<%= data.name %>"
+                    name = "name"
                 /></div>
               </div>
               <div class="row mt-3">
@@ -726,7 +734,8 @@
                     type="text"
                     class="form-control"
                     placeholder="enter phone number"
-                    value=""
+                    value="<%= data.contact %>"
+                    name = "contact"
                 /></div>
                 <div class="col-md-12"
                   ><label class="labels">Address Line 1</label
@@ -734,23 +743,48 @@
                     type="text"
                     class="form-control"
                     placeholder="enter address line 1"
-                    value=""
+                    value="<%= data.address %>"
+                    name = "address"
                 /></div>
-                <div class="col-md-12"
+                <!-- <div class="col-md-12"
                   ><label class="labels">Email ID</label
                   ><input
                     type="text"
                     class="form-control"
                     placeholder="enter email id"
                     value=""
-                /></div>
+                /></div> -->
+                <div class="mb-3">
+                  <label for="formFileSm" class="form-label labels">Profile Pic</label>
+                  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image">
+                </div>
+                <div class="col-md-6"
+                ><label class="labels">ID Proof Type</label
+                ><input
+                  type="text"
+                  class="form-control"
+                  placeholder="Aadhar Card"
+                  value="<%= data.idProof.idType %>"
+                  name="idType"
+              /></div>
+              <div class="col-md-6"
+              ><label class="labels">ID Proof Number</label
+              ><input
+                type="text"
+                class="form-control"
+                placeholder="Aadhar Card Number"
+                value="<%= data.idProof.idNumber %>"
+                name = "idNumber"
+            /></div>
+              
               </div>
-              <div class="mt-5 text-end"
-                ><button class="btn btn-outline-dark" type="button"
+              <div class="mt-4 text-end"
+                ><button class="btn btn-outline-dark" type="submit"
                   >Save Profile</button
                 ></div
               >
             </div>
+          </form>
           </div>
         </div>
       </div>
