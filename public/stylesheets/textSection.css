@@ -1,20 +1,26 @@
+@font-face {
+  font-family: voyage;
+  src: url("../fonts/voayage.otf");
+}
 .textSection {
-  padding: 10rem;
+  padding: 17vw;
   height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 .textSection .text {
   width: 100%;
 }
 .textSection h1 {
-  font-family: "Saol Display Regular";
-  font-size: 7rem;
+  font-family: voyage;
+  font-size: 8rem;
   opacity: 0;
   height: fit-content;
   overflow: hidden;
+  text-align: center;
 }
 @media only screen and (max-width: 600px) {
   .textSection {

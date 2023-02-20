@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mappo</title>
+    <meta name="viewport" content="initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      #map {
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .bulding {
+        background-image: url("https://nodes3cdn.hotpads.com/hotpads-web/1676574453/building-red-1Jyajvk.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 30px !important;
+        width: 30px !important;
+        cursor: pointer;
+      }
+
+      .house {
+        background-image: url("https://nodes3cdn.hotpads.com/hotpads-web/1676574453/house-red-2orCUWx.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 20px !important;
+        width: 20px !important;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <script>
+      // This Code is HandWritten By Aayush Chouhan {After Learning Tha ChatGPT is just for help it cant code for real}
+      const mbUrl =
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+      const streets = L.tileLayer(mbUrl, {
+        id: "mapbox/streets-v11",
+        tileSize: 512,
+        zoomOffset: -1,
+      });
+      const satellite = L.tileLayer(mbUrl, {
+        id: "mapbox/satellite-v9",
+        tileSize: 512,
+        zoomOffset: -1,
+        maxZoom: 17,
+      });
+      const buldings = L.layerGroup();
+      const houses = L.layerGroup();
+      const map = L.map("map", {
+        attributionControl: false,
+        center: [23.197572, 77.456996],
+        zoom: 13,
+        layers: [streets, buldings],
+      });
+
+      const baseLayers = {
+        Streets: streets,
+        Satellite: satellite,
+      };
+
+      var bulding = [
+        {
+          lat: 23.197572,
+          lon: 77.456996,
+          name: "Ankur Property",
+          info: "This is a beautiful property of Ankur.",
+        },
+        {
+          lat: 23.20099,
+          lon: 77.457773,
+          name: "Aayush Property",
+          info: "This is a beautiful property of Aayush.",
+        },
+        {
+          lat: 23.201591,
+          lon: 77.461389,
+          name: "SJ Property",
+          info: "This is a beautiful property of SJ.",
+        },
+      ];
+
+      bulding.forEach((b) => {
+        const marker = L.marker([b.lat, b.lon], {
+          icon: L.divIcon({
+            className: "bulding",
+          }),
+        })
+          .bindPopup("<b>" + b.name + "</b><br>" + b.info)
+          .addTo(buldings);
+      });
+
+      var house = [
+        {
+          lat: 23.202038,
+          lon: 77.453688,
+          name: "Techno Ka Gharg",
+          info: "16 tb ram and 128pb storage",
+        },
+        {
+          lat: 23.198433,
+          lon: 77.443759,
+          name: "Rehbar ka zGhar",
+          info: "3bhk with balconey an swiming pool",
+        },
+        {
+          lat: 23.192296,
+          lon: 77.443638,
+          name: "New York Property",
+          info: "Just Dreaming New York.",
+        },
+      ];
+
+      house.forEach((h) => {
+        const marker = L.marker([h.lat, h.lon], {
+          icon: L.divIcon({
+            className: "house",
+          }),
+        })
+          .bindPopup("<b>" + h.name + "</b><br>" + h.info)
+          .addTo(houses);
+      });
+
+      const overlays = {
+        Buldings: buldings,
+        Houses: houses,
+      };
+
+      const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+      // Method 2 of adding
+      // const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
+      // const rubyHill = L.marker([39.68, -105.00]).bindPopup('This is Ruby Hill Park.');
+      // const parks = L.layerGroup([crownHill, rubyHill]);
+
+      // layerControl.addOverlay(parks, 'Parks');
+    </script>
+  </body>
+</html>

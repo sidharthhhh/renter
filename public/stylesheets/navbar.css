@@ -24,6 +24,11 @@
   padding: 10vh 5vw;
   margin: 0;
 }
+#menu .user {
+  position: absolute;
+  top: 5rem;
+  right: 3rem;
+}
 #menu ul {
   list-style-type: none;
 }
