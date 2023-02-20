@@ -166,9 +166,9 @@ router.get('/upload/property', function (req, res) {
   res.render('property')
 })
 
-router.get('/properties',(req,res,next)=>{
+router.get('/properties', (req, res, next) => {
   console.log(req.query)
-  res.redirect('/')
+  res.render('properties')
 })
 
 module.exports = router
