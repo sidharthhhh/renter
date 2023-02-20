@@ -24,7 +24,7 @@ const ProductImageUpload = multer({storage: config.ProductImageStorage});
 //index page
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
-    user.findOne({ email: req.user.username }, (err, user) => {
+    user.findOne({ username: req.user.username }, (err, user) => {
       var details = { username: user.username, profilepic: user.profilepic }
       res.render('index', details)
     })
@@ -181,8 +181,7 @@ router.get('/upload/property' , isLoggedIn, function(req,res){
 router.get('/filter/property/:roomno' , async function(req,res){
   var rooms = req.params.roomno;
   var properties = await propertiesModel.find({bedrooms: rooms});
-  res.send(properties);
-  res.send(rooms);
+  res.send(properties); res.send(rooms);
 })
 
 //on click of room filter finding property on the basis of price range
