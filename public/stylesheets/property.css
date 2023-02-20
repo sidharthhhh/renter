@@ -1,0 +1,142 @@
+.propertyCreation textarea {
+  resize: none;
+}
+.modal-dialog {
+  min-width: 700px;
+  width: 80vw !important;
+}
+.mf {
+  display: flex;
+  justify-content: space-between;
+}
+.propertyCreation {
+  user-select: none;
+}
+.heading {
+  font-size: 17px;
+}
+.price {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.price input {
+  border: 1px solid rgb(26, 26, 26);
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.house-btn {
+  pointer-events: none;
+  width: 8vw;
+  min-width: 120px;
+  height: 80px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid rgb(90, 90, 90);
+}
+.radioWrapper:has(input[type="radio"]:checked) label button.house-btn {
+  border: 2.5px solid rgb(11, 11, 11) !important ;
+  background-color: #e6e6e6 !important;
+  color: #000 !important;
+}
+
+.property-cnt {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.property-cnt button div img {
+  width: 20px;
+}
+
+.btn-cnt {
+  width: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.any {
+  border: 1px solid rgb(26, 26, 26);
+  border-radius: 30px;
+  padding: 5px 22px;
+  background-color: rgb(44, 44, 44);
+  color: #fff;
+  pointer-events: none;
+}
+
+.no {
+  pointer-events: none;
+  background-color: #fff;
+  color: rgb(26, 26, 26);
+}
+
+.radioWrapper:has(input[type="radio"]:checked) label button {
+  background-color: rgb(34, 34, 34) !important;
+  color: #fff !important;
+}
+.checkBoxWrapper:has(input:checked) label span {
+  background-color: rgb(36, 36, 36) !important;
+}
+.checkBoxWrapper label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+.checkBoxWrapper label span {
+  color: #fff !important;
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 1px solid rgba(0, 0, 0, 0.158);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ammenities {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: start;
+}
+.ammenities > div {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.prpty-desc textarea {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.prpty-access,
+.furnished {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.prpty-access select,
+.furnished select {
+  width: 80px;
+  border-radius: 10px;
+}
+
+.furnished select {
+  width: 150px;
+}
+
+.address textarea {
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid rgb(26, 26, 26);
+  border-radius: 10px;
+}
+/* images */
