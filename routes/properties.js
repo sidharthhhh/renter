@@ -48,9 +48,7 @@ var propertiesSchema = mongoose.Schema({
         review:String,
         rating:Number
     }],
-    houseRules:[{
-        type:String
-    }],
+    houseRules:String,
     bedrooms:{
         type:Number,
         default:0
@@ -66,7 +64,10 @@ var propertiesSchema = mongoose.Schema({
     status:{
         type:String,
         default:"Available"
-    }
+    },
+    pics:[{
+        type:String
+   } ]
 
 });
 
