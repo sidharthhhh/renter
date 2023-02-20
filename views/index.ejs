@@ -24,7 +24,10 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
     <link rel="stylesheet" href="../stylesheets/style.css" />
     <link rel="stylesheet" href="../stylesheets/categorySection.css" />
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
@@ -32,6 +35,7 @@
     <link rel="stylesheet" href="../stylesheets/subHero.css" />
     <link rel="stylesheet" href="../stylesheets/textSection.css" />
     <link rel="stylesheet" href="../stylesheets/searchSection.css" />
+    <link rel="stylesheet" href="../stylesheets/footer.css" />
   </head>
   <style>
     #preLoader {
@@ -118,9 +122,7 @@
       <!-- Text section -->
       <section class="textSection">
         <div class="text">
-          <h1>Find it</h1>
-          <h1 class="text-center">love it</h1>
-          <h1 style="float: right">rent it</h1>
+          <h1>Find it, love it, rent it</h1>
         </div>
       </section>
       <!-- Text section -->
@@ -136,9 +138,7 @@
       <!-- Text section -->
       <section class="textSection">
         <div class="text">
-          <h1>Find it</h1>
-          <h1 class="text-center">love it</h1>
-          <h1 style="float: right">rent it</h1>
+          <h1>Find it, love it, rent it</h1>
         </div>
       </section>
       <!-- Text section -->
@@ -146,9 +146,11 @@
       <!-- Category Section -->
       <%- include('./components/index/moreCategorySection.ejs') %>
       <!-- Category Section -->
-
-      <!-- Footer here -->
     </div>
+
+    <!-- Footer here -->
+    <%- include('./components/footer.ejs') %>
+    <!-- Footer here -->
 
     <section id="preLoader">
       <h1>RENTER</h1>

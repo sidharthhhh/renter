@@ -13,8 +13,15 @@ passport.use(new localStrategy(userModel.authenticate()))
 const UserImageUpload = multer({ storage: config })
 
 router.get('/', function (req, res, next) {
-  var details = { username: '', profilepic: '' }
-  res.render('index', details)
+  if (req.isAuthenticated()) {
+    user.findOne({ email: req.user.username }, (err, user) => {
+      var details = { username: user.username, profilepic: user.profilepic }
+      res.render('index', details)
+    })
+  } else {
+    var details = { username: '', profilepic: '' }
+    res.render('index', details)
+  }
 })
 
 router.post('/register', function (req, res, next) {
@@ -81,18 +88,17 @@ router.get('/contact', function (req, res, next) {
 
 //there will be a option to see profile page
 var ignore = ['properties']
-router.get('/profile', async function (req, res) {
+router.get('/profile', isLoggedIn, async function (req, res) {
   var verified = true
-  // var user = await userModel.findOne({ username: req.session.passport.user })
-  // var ans = user.toJSON()
-  // for (let prop in ans) {
-  //   if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
-  //     verified = false
-  //   }
-  // }
+  var user = await userModel.findOne({ username: req.session.passport.user })
+  var ans = user.toJSON()
+  for (let prop in ans) {
+    if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
+      verified = false
+    }
+  }
   console.log(verified)
-  // res.render('profile', { data: user, verified: verified })
-  res.render('profile', { verified: verified })
+  res.render('profile', { data: user, verified: verified })
 })
 
 //on the profile page there will be a button to verify your account
@@ -158,6 +164,11 @@ router.post('/upload/properties', isLoggedIn, async function (req, res) {
 
 router.get('/upload/property', function (req, res) {
   res.render('property')
+})
+
+router.get('/properties',(req,res,next)=>{
+  console.log(req.query)
+  res.redirect('/')
 })
 
 module.exports = router
