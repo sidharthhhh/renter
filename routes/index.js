@@ -95,17 +95,18 @@ router.get('/contact', function (req, res, next) {
 
 //there will be a option to see profile page
 var ignore = ['properties']
-router.get('/profile', isLoggedIn, async function (req, res) {
+router.get('/profile', async function (req, res) {
   var verified = true
-  var user = await userModel.findOne({ username: req.session.passport.user })
-  var ans = user.toJSON()
-  for (let prop in ans) {
-    if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
-      verified = false
-    }
-  }
+  // var user = await userModel.findOne({ username: req.session.passport.user })
+  // var ans = user.toJSON()
+  // for (let prop in ans) {
+  //   if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
+  //     verified = false
+  //   }
+  // }
   console.log(verified)
-  res.render('profile', { data: user, verified: verified })
+  // res.render('profile', { data: user, verified: verified })
+  res.render('profile', { verified: verified })
 })
 
 //on the profile page there will be a button to verify your account
@@ -195,9 +196,24 @@ router.get('/filter/property/:minprice/:maxprice', async function(req,res){
     res.send(properties);
 })
 
-router.get('/properties', (req, res, next) => {
-  console.log(req.query)
-  res.render('properties')
+//to display upload/property form
+router.get('/upload/property' , isLoggedIn, function(req,res){
+  res.render("property");
+});
+
+//on click of room filter finding property on the basis of no. of rooms
+router.get('/filter/property/:roomno' , async function(req,res){
+  var rooms = req.params.roomno;
+  var properties = await propertiesModel.find({bedrooms: rooms});
+  res.send(properties); res.send(rooms);
+})
+
+//on click of room filter finding property on the basis of price range
+router.get('/filter/property/:minprice/:maxprice', async function(req,res){
+    var minprice = req.params.minprice;
+    var maxprice = req.params.maxprice;
+    var properties = await propertiesModel.find({price:{$gt: minprice-1, $lt: maxprice+1}});
+    res.send(properties);
 })
 
 module.exports = router
