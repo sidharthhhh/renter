@@ -22,7 +22,8 @@
   top: 50%;
   align-items: center;
   transform-origin: center;
-  clip-path: circle(200% at 0% 0%);
+  clip-path: circle(100% at 50% 50%);
+  transition: clip-path 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 #subHero::-webkit-scrollbar {
   display: none;

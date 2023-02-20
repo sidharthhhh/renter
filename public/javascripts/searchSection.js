@@ -60,23 +60,24 @@ function searchSectionTextAnimation() {
 }
 searchSectionTextAnimation()
 var showFlag = true
+function showSearch() {
+  if (showFlag)
+    gsap.to('#searchSection', {
+      clipPath: 'circle(100% at 50% 50%)',
+      duration: 0.7,
+      ease: 'cubic-bezier(.55,.21,0,.87)',
+    })
+  else {
+    gsap.to('#searchSection', {
+      clipPath: 'circle(2% at 93% 10%)',
+      duration: 0.7,
+      ease: 'cubic-bezier(.55,.21,0,.87)',
+    })
+  }
+  showFlag = !showFlag
+}
 document
   .querySelector('#searchShowButton')
   .addEventListener('click', (event) => {
-    if (showFlag)
-      gsap.to('#searchSection', {
-        clipPath: 'circle(100% at 50% 50%)',
-        duration: 0.7,
-        ease: 'cubic-bezier(.55,.21,0,.87)',
-      })
-    else {
-      gsap.to('#searchSection', {
-        clipPath: 'circle(2% at 93% 10%)',
-        duration: 0.7,
-        ease: 'cubic-bezier(.55,.21,0,.87)',
-      })
-    }
-    showFlag = !showFlag
-    // document.querySelector('#searchSection').style.clipPath =
-    //   'circle(200% at 93% 10%)'
+    showSearch()
   })
