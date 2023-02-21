@@ -319,6 +319,7 @@ router.post('/filter', async function (req, res) {
 
 // Search property by location
 router.post('/properties', async (req, res, next) => {
+  await db.collection('properties').createIndex({ propertyAddress: 'text' })
   var minprice = req.body.minPrice || 0
   var maxprice = req.body.maxPrice || 30000
   let query = {}
@@ -343,11 +344,7 @@ router.post('/properties', async (req, res, next) => {
   if (req.body.furnished) {
     query.furnishedType = req.body.furnished
   }
-  console.log(query)
   var ans = new Array()
-
-  await db.collection('properties').createIndex({ propertyAddress: 'text' })
-
   var add = await propertiesModel
     .find({ $text: { $search: '88' } }, { score: { $meta: 'textScore' } })
     .sort({ score: { $meta: 'textScore' } })
@@ -359,8 +356,13 @@ router.post('/properties', async (req, res, next) => {
       ans.push(property)
     }
   })
-  console.log(ans)
-  res.render('properties', { properties: ans })
+
+  const commonObjects = add.filter((obj1) => {
+    return ans.some((obj2) => {
+      return obj1._id.equals(obj2._id)
+    })
+  })
+  res.render('properties', { properties: commonObjects })
 })
 
 module.exports = router
