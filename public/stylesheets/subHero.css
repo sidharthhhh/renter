@@ -9,6 +9,13 @@
   perspective: 100000vh;
   font-family: "Saol Display Regular";
 }
+#subHeroText {
+  z-index: 9999999999999999999999999;
+  color: #4d4d4d;
+  -webkit-text-fill-color: #4d4d4d; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  /* -webkit-text-stroke-color: rgb(255, 255, 255); */
+}
 .images {
   perspective: 100000vh;
   display: flex;

@@ -1,8 +1,15 @@
 <section id="menu">
   <div class="user">
-    <a href="/login" class="btn btn-outline-light" style="border: none"
-      >LOGIN</a
-    >
+    <% if(username==''){ %>
+    <a href="/login" class="btn btn-outline-light" style="border: none">
+      LOGIN
+    </a>
+
+    <% }else{ %>
+    <a href="/profile" class="btn btn-outline-light" style="border: none">
+      <span> <%= username %> </span>
+    </a>
+    <% } %>
   </div>
   <ul>
     <li>
@@ -16,11 +23,6 @@
     <li>
       <a href="#footer">
         <h1>CONTACT</h1>
-      </a>
-    </li>
-    <li>
-      <a href="/profile">
-        <h1>PROFILE</h1>
       </a>
     </li>
     <li>

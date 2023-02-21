@@ -11,6 +11,36 @@ const localStrategy = require('passport-local')
 passport.use(new localStrategy(userModel.authenticate()))
 const UserImageUpload = multer({ storage: config.UserImageStorage })
 const ProductImageUpload = multer({ storage: config.ProductImageStorage })
+var GoogleStrategy = require('passport-google-oidc')
+require('dotenv').config()
+
+async function getLatLng(address) {
+  var ltg = {}
+  const axios = require('axios')
+
+  const options = {
+    method: 'GET',
+    url: 'https://trueway-geocoding.p.rapidapi.com/Geocode',
+    params: {
+      address: address,
+      language: 'en',
+    },
+    headers: {
+      'X-RapidAPI-Key': 'c93b060f90mshff7101bea4f72d1p19f697jsn72262717a843',
+      'X-RapidAPI-Host': 'trueway-geocoding.p.rapidapi.com',
+    },
+  }
+
+  await axios
+    .request(options)
+    .then(function (response) {
+      ltg = response.data.results[0].location
+    })
+    .catch(function (error) {
+      console.error(error)
+    })
+  return ltg
+}
 
 //index page
 router.get('/', function (req, res, next) {
@@ -75,6 +105,49 @@ router.get('/logout', function (req, res, next) {
   })
 })
 
+// signup with google
+router.get('/login/federated/google', passport.authenticate('google'))
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env['GOOGLE_CLIENT_ID'],
+      clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
+      callbackURL: '/oauth2/redirect/google',
+      scope: ['email', 'profile'],
+    },
+    function verify(issuer, profile, cb) {
+      userModel.findOne({ username: profile.emails[0].value }, function (
+        err,
+        user,
+      ) {
+        if (err) {
+          return err
+        }
+        if (user) {
+          return cb(null, user)
+        }
+        userModel
+          .create({
+            name: profile.displayName,
+            username: profile.emails[0].value,
+          })
+          .then((user) => {
+            return cb(null, user)
+          })
+      })
+    },
+  ),
+)
+
+router.get(
+  '/oauth2/redirect/google',
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+  }),
+)
+
 //there will be a option to see profile page
 var ignore = ['properties']
 router.get('/profile', isLoggedIn, async function (req, res) {
@@ -87,7 +160,12 @@ router.get('/profile', isLoggedIn, async function (req, res) {
     }
   }
   console.log(verified)
-  res.render('profile', { data: user, verified: verified })
+  res.render('profile', {
+    data: user,
+    verified: verified,
+    username: '',
+    profilepic: '',
+  })
   // res.render('profile', { verified: verified })
 })
 
@@ -124,6 +202,8 @@ router.post(
   ProductImageUpload.array('images', 4),
   async function (req, res) {
     var user = await userModel.findOne({ username: req.user.username })
+    var loc = await getLatLng(req.body.propertyAddress)
+    console.log(loc)
     var data = {
       ownerId: user._id,
       propertyDescription: req.body.propertyDescription,
@@ -140,7 +220,9 @@ router.post(
       floor: req.body.floor,
       status: req.body.status,
       pics: req.files.map((elem) => elem.filename),
+      latitudeAndLongitude: loc,
     }
+    console.log(data)
     var property = await propertiesModel.create(data)
     user.properties.push(property._id)
     await user.save()
@@ -158,36 +240,6 @@ router.get('/find/properties/:pageno', async function (req, res) {
   res.send(properties)
 })
 
-//to upload property
-router.post(
-  '/upload/properties',
-  isLoggedIn,
-  ProductImageUpload.array('images', 4),
-  async function (req, res) {
-    var user = await userModel.findOne({ username: req.user.username })
-    var data = {
-      ownerId: user._id,
-      propertyDescription: req.body.propertyDescription,
-      propertyAddress: req.body.propertyAddress,
-      // LatitudeAndLongitude:{latitude:"", longitude:""},
-      price: parseInt(req.body.price.replace(/,/g, ''), 10),
-      addOnAmenities: req.body.ammenities || [],
-      propertyType: req.body.proprtyType,
-      accessibility: req.body.accessibility,
-      furnishedType: req.body.furnished,
-      houseRules: req.body.houseRules,
-      bedrooms: req.body.bedrooms,
-      beds: req.body.beds,
-      floor: req.body.floor,
-      status: req.body.status,
-      pics: req.files.map((elem) => elem.filename),
-    }
-    var property = await propertiesModel.create(data)
-    user.properties.push(property._id)
-    await user.save()
-    res.redirect('/profile')
-  },
-)
 
 //to display upload/property form
 router.get('/upload/property', isLoggedIn, function (req, res) {
@@ -200,43 +252,50 @@ router.get('/show/properties', async function (req, res) {
   res.send(properties)
 })
 
-//on click of room filter finding property on the basis of no. of rooms
-// router.get('/filter/property/:roomno' , async function(req,res){
-//   var rooms = req.params.roomno;
-//   var properties = await propertiesModel.find({bedrooms: rooms});
-//   res.send(properties); res.send(rooms);
-// })
-
-// //on click of room filter finding property on the basis of price range
-// router.get('/filter/property/:minprice/:maxprice', async function(req,res){
-//     var minprice = req.params.minprice;
-//     var maxprice = req.params.maxprice;
-//     var properties = await propertiesModel.find({price:{$gt: minprice-1, $lt: maxprice+1}});
-//     res.send(properties);
-// })
-
-router.post('/search/address', async function (req, res) {
-  async function searchPropertiesByAddress(address) {
-    const pipeline = [
-      { $match: { $text: { $search: address } } },
-      { $sort: { score: { $meta: 'textScore' } } },
-      { $limit: 8 },
-      {
-        $project: {
-          _id: 1,
-          address: 1,
-          price: 1,
-          bedrooms: 1,
-          bathrooms: 1,
-          sqft: 1,
-        },
-      },
-    ]
-
-    const results = await propertiesModel.aggregate(pipeline).toArray()
-
-    return results
+// Filter for search
+router.post('/filter', async function (req, res) {
+  var {
+    propertyType,
+    bedrooms,
+    beds,
+    floor,
+    ammenities,
+    furnishedtype,
+    accessibility,
+  } = req.query
+  var minprice = req.body.minPrice
+  var maxprice = req.body.maxPrice
+  let query = {}
+  if (req.body.proprtyType) {
+    query.propertyType = req.body.proprtyType
   }
+  if (req.body.bedrooms) {
+    query.bedrooms = req.body.bedrooms
+  }
+  if (req.body.beds) {
+    query.beds = req.body.beds
+  }
+  if (req.body.floor) {
+    query.floor = req.body.floor
+  }
+  if (req.body.ammenities) {
+    query.ammenities = req.body.ammenities
+  }
+  if (req.body.accessibility) {
+    query.accessibility = req.body.accessibility
+  }
+  if (req.body.furnished) {
+    query.furnishedType = req.body.furnished
+  }
+  console.log(query)
+  var ans = new Array()
+  var searchResults = await propertiesModel.find(query)
+  searchResults.forEach(function (property) {
+    if (property.price >= minprice && property.price <= maxprice) {
+      ans.push(property)
+    }
+  })
+  res.send(ans)
 })
 
 module.exports = router
