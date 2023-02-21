@@ -1,16 +1,4 @@
 <section id="menu">
-  <div class="user">
-    <% if(username==''){ %>
-    <a href="/login" class="btn btn-outline-light" style="border: none">
-      LOGIN
-    </a>
-
-    <% }else{ %>
-    <a href="/profile" class="btn btn-outline-light" style="border: none">
-      <span> <%= username %> </span>
-    </a>
-    <% } %>
-  </div>
   <ul>
     <li>
       <a href="/#dummyCover2">
@@ -32,4 +20,29 @@
     </li>
   </ul>
 </section>
-<i id="menuToggle" class="ri-menu-line fs-2"> </i>
+<div class="menuButtons d-flex gap-3 justify-content-center align-items-center">
+  <i id="menuToggle" class="ri-menu-line fs-2"> </i>
+  <div class="user">
+    <% if(username==''){ %>
+    <a href="/login" class="btn btn-outline-dark"> LOGIN </a>
+    <% }else{ %>
+    <a
+      href="/profile"
+      class="btn btn-outline-dark d-flex gap-2 justify-content-center align-items-center"
+    >
+      <span> <%= username %> </span>
+      <% if(profilepic==''){ %>
+      <i class="ri-user-line fs-3"></i>
+      <% }else{ %>
+      <img
+        height="25"
+        width="25"
+        style="object-fit: cover; border-radius: 50%"
+        src="../images/uploads/userImages/5bbaf54d536e47f81ddb6933a6b2.png"
+        alt=""
+      />
+      <% } %>
+    </a>
+    <% } %>
+  </div>
+</div>

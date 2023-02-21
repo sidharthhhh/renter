@@ -1,7 +1,12 @@
 const mongoose = require('mongoose')
 var plm = require('passport-local-mongoose')
 
+
 var propertiesSchema = mongoose.Schema({
+  title: {
+    type: String,
+    default: '',
+  },
   ownerId: {
     type: mongoose.Types.ObjectId,
     ref: 'user',

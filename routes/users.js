@@ -1,4 +1,4 @@
- const express = require('express')
+const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const plm = require('passport-local-mongoose')
@@ -9,9 +9,9 @@ var userSchema = mongoose.Schema({
   name: String,
   username: {
     type: String,
-    required:true,
-    unique:true
-    },
+    required: true,
+    unique: true,
+  },
   //user is rental (renting some property)
   isRental: Boolean,
   contact: Number,
@@ -27,11 +27,11 @@ var userSchema = mongoose.Schema({
       ref: 'Properties',
     },
   ],
-  idProof: { 
-      idType: String,
-      idNumber: String, // pancard no. contains character
-   },
-  password:String
+  idProof: {
+    idType: String,
+    idNumber: String, // pancard no. contains character
+  },
+  password: String,
 })
 
 userSchema.plugin(plm)

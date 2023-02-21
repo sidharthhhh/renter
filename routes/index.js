@@ -3,8 +3,14 @@ var router = express.Router()
 const passport = require('passport')
 const userModel = require('./users.js')
 const propertiesModel = require('./properties.js')
+const mongoose = require('mongoose')
 const multer = require('multer')
 const config = require('../config/config.js')
+
+var db
+var mongoCLient = mongoose.connect('mongodb://0.0.0.0/renter').then(() => {
+  db = mongoose.connection.db
+})
 
 /* GET home page. */
 const localStrategy = require('passport-local')
@@ -41,12 +47,24 @@ async function getLatLng(address) {
     })
   return ltg
 }
+function trimEmail(email) {
+  const username = email.slice(0, email.indexOf('@'))
+
+  const trimmedUsername = username.replace(/\d/g, '')
+
+  const trimmedEmail = trimmedUsername
+
+  return trimmedEmail
+}
 
 //index page
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
     userModel.findOne({ username: req.user.username }, (err, user) => {
-      var details = { username: user.username, profilepic: user.profilepic }
+      var details = {
+        username: trimEmail(user.username),
+        profilepic: user.profilepic,
+      }
       res.render('index', details)
     })
   } else {
@@ -159,14 +177,24 @@ router.get('/profile', isLoggedIn, async function (req, res) {
       verified = false
     }
   }
-  console.log(verified)
-  res.render('profile', {
-    data: user,
-    verified: verified,
-    username: '',
-    profilepic: '',
-  })
-  // res.render('profile', { verified: verified })
+  if (req.isAuthenticated()) {
+    userModel.findOne({ username: req.user.username }, (err, user) => {
+      res.render('profile', {
+        data: user,
+        verified: verified,
+        username: trimEmail(user.username),
+        profilepic: user.profilepic,
+      })
+    })
+  } else {
+    var details = { username: '', profilepic: '' }
+    res.render('profile', {
+      data: user,
+      verified: verified,
+      username: '',
+      profilepic: '',
+    })
+  }
 })
 
 //here user will enter all his details, upload profile pic and after verifying will again go back to profile page
@@ -205,6 +233,7 @@ router.post(
     var loc = await getLatLng(req.body.propertyAddress)
     console.log(loc)
     var data = {
+      title: req.body.title || '',
       ownerId: user._id,
       propertyDescription: req.body.propertyDescription,
       propertyAddress: req.body.propertyAddress,
@@ -240,7 +269,6 @@ router.get('/find/properties/:pageno', async function (req, res) {
   res.send(properties)
 })
 
-
 //to display upload/property form
 router.get('/upload/property', isLoggedIn, function (req, res) {
   res.render('property')
@@ -254,15 +282,6 @@ router.get('/show/properties', async function (req, res) {
 
 // Filter for search
 router.post('/filter', async function (req, res) {
-  var {
-    propertyType,
-    bedrooms,
-    beds,
-    floor,
-    ammenities,
-    furnishedtype,
-    accessibility,
-  } = req.query
   var minprice = req.body.minPrice
   var maxprice = req.body.maxPrice
   let query = {}
@@ -296,6 +315,52 @@ router.post('/filter', async function (req, res) {
     }
   })
   res.send(ans)
+})
+
+// Search property by location
+router.post('/properties', async (req, res, next) => {
+  var minprice = req.body.minPrice || 0
+  var maxprice = req.body.maxPrice || 30000
+  let query = {}
+  if (req.body.proprtyType) {
+    query.propertyType = req.body.proprtyType
+  }
+  if (req.body.bedrooms) {
+    query.bedrooms = req.body.bedrooms
+  }
+  if (req.body.beds) {
+    query.beds = req.body.beds
+  }
+  if (req.body.floor) {
+    query.floor = req.body.floor
+  }
+  if (req.body.ammenities) {
+    query.ammenities = req.body.ammenities
+  }
+  if (req.body.accessibility) {
+    query.accessibility = req.body.accessibility
+  }
+  if (req.body.furnished) {
+    query.furnishedType = req.body.furnished
+  }
+  console.log(query)
+  var ans = new Array()
+
+  await db.collection('properties').createIndex({ propertyAddress: 'text' })
+
+  var add = await propertiesModel
+    .find({ $text: { $search: '88' } }, { score: { $meta: 'textScore' } })
+    .sort({ score: { $meta: 'textScore' } })
+    .limit(8)
+
+  var searchResults = await propertiesModel.find(query)
+  searchResults.forEach(function (property) {
+    if (property.price >= minprice && property.price <= maxprice) {
+      ans.push(property)
+    }
+  })
+  console.log(ans)
+  res.render('properties', { properties: ans })
 })
 
 module.exports = router

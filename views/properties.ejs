@@ -13,6 +13,88 @@
     />
     <link rel="stylesheet" href="../stylesheets/property.css" />
     <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
+    <style>
+      .range_container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .sliders_control {
+        position: relative;
+        min-height: 50px;
+      }
+
+      .form_control {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        color: #635a5a;
+      }
+      .form_control_container_time_input {
+        border: none;
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        pointer-events: all;
+        width: 24px;
+        height: 24px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px #c6c6c6;
+        cursor: pointer;
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        -webkit-appearance: none;
+        pointer-events: all;
+        width: 24px;
+        height: 24px;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 0 1px #c6c6c6;
+        cursor: pointer;
+      }
+
+      input[type="range"]::-webkit-slider-thumb:hover {
+        background: #f7f7f7;
+      }
+
+      input[type="range"]::-webkit-slider-thumb:active {
+        box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+        -webkit-box-shadow: inset 0 0 3px #387bbe, 0 0 9px #387bbe;
+      }
+
+      input[type="number"] {
+        color: #8a8383;
+        width: 50px;
+        height: 30px;
+        font-size: 20px;
+        border: none;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        opacity: 1;
+      }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        background-color: #c6c6c6;
+        pointer-events: none;
+      }
+
+      #fromSlider {
+        height: 0;
+        z-index: 1;
+      }
+    </style>
   </head>
   <body>
     <div class="card">
@@ -29,7 +111,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="staticBackdropLabel"
-                >Upload Your Property</h1
+                >Filter Your Suitable property</h1
               >
               <button
                 type="button"
@@ -38,573 +120,630 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <div class="address">
-                <h2 class="heading">Property price In INR</h2>
-                <input
-                  class="col-12 form-control"
-                  name="price"
-                  id=""
-                  placeholder="Enter property price"
-                />
-              </div>
-              <hr />
-              <h2 class="heading">Property Type</h2>
-              <div class="property-cnt">
-                <div class="radioWrapper">
-                  <label for="t1"
-                    ><button class="house-btn">
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
-                          alt=""
+            <form action="/properties" method="post">
+              <div class="modal-body">
+                <div class="range_container mt-5">
+                  <div class="sliders_control">
+                    <input
+                      id="fromSlider"
+                      type="range"
+                      value="1400"
+                      min="0"
+                      max="30000"
+                    />
+                    <input
+                      id="toSlider"
+                      type="range"
+                      value="2540"
+                      min="0"
+                      max="30000"
+                    />
+                  </div>
+                  <div class="form_control">
+                    <div class="form_control_container">
+                      <div class="form_control_container__time"
+                        ><small>Min</small></div
+                      >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <small>₹</small>
+                        <input
+                          class="form_control_container_time_input"
+                          type="text"
+                          id="fromInput"
+                          value="1400"
+                          min="0"
+                          max="30000"
+                          name="minPrice"
                         />
-                        <h5>House</h5>
                       </div>
-                    </button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="house"
-                    id="t1"
-                    name="proprtyType"
-                  />
-                </div>
-                <div class="radioWrapper">
-                  <label for="t2"
-                    ><button class="house-btn">
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg"
-                          alt=""
+                    </div>
+                    <div class="form_control_container">
+                      <div class="form_control_container__time"
+                        ><small>Max</small></div
+                      >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <small>₹</small>
+                        <input
+                          class="form_control_container_time_input"
+                          type="text"
+                          id="toInput"
+                          value="2540"
+                          min="0"
+                          max="30000"
+                          name="maxPrice"
                         />
-                        <h5>Flat</h5>
                       </div>
-                    </button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="flat"
-                    id="t2"
-                    name="proprtyType"
-                  />
+                    </div>
+                  </div>
                 </div>
-                <div class="radioWrapper">
-                  <label for="t3"
-                    ><button class="house-btn">
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
-                          alt=""
+                <hr />
+                <h2 class="heading">Property Type</h2>
+                <div class="property-cnt">
+                  <div class="radioWrapper">
+                    <label for="t1"
+                      ><button class="house-btn">
+                        <div class="house-div">
+                          <img
+                            src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
+                            alt=""
+                          />
+                          <h5>House</h5>
+                        </div>
+                      </button></label
+                    >
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="house"
+                      id="t1"
+                      name="proprtyType"
+                    />
+                  </div>
+                  <div class="radioWrapper">
+                    <label for="t2"
+                      ><button class="house-btn">
+                        <div class="house-div">
+                          <img
+                            src="https://a0.muscache.com/pictures/21cfc7c9-5457-494d-9779-7b0c21d81a25.jpg"
+                            alt=""
+                          />
+                          <h5>Flat</h5>
+                        </div>
+                      </button></label
+                    >
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="flat"
+                      id="t2"
+                      name="proprtyType"
+                    />
+                  </div>
+                  <div class="radioWrapper">
+                    <label for="t3"
+                      ><button class="house-btn">
+                        <div class="house-div">
+                          <img
+                            src="https://a0.muscache.com/pictures/4d7580e1-4ab2-4d26-a3d6-97f9555ba8f9.jpg"
+                            alt=""
+                          />
+                          <h5>PG</h5>
+                        </div>
+                      </button></label
+                    >
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="pg"
+                      id="t3"
+                      name="proprtyType"
+                    />
+                  </div>
+                  <div class="radioWrapper">
+                    <label for="t4"
+                      ><button class="house-btn">
+                        <div class="house-div">
+                          <img
+                            src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
+                            alt=""
+                          />
+                          <h5>Guest-house</h5>
+                        </div>
+                      </button></label
+                    >
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Guest-House"
+                      id="t4"
+                      name="proprtyType"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="rooms-bed">
+                  <div class="mb-2">
+                    <h5 class="form-label">BedRooms</h5>
+                    <div class="btn-cnt">
+                      <div class="radioWrapper">
+                        <label for="brr8"
+                          ><button class="any no">any</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          value="any"
+                          id="brr8"
+                          name="bedrooms"
                         />
-                        <h5>PG</h5>
                       </div>
-                    </button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="pg"
-                    id="t3"
-                    name="proprtyType"
-                  />
-                </div>
-                <div class="radioWrapper">
-                  <label for="t4"
-                    ><button class="house-btn">
-                      <div class="house-div">
-                        <img
-                          src="https://a0.muscache.com/pictures/6f261426-2e47-4c91-8b1a-7a847da2b21b.jpg"
-                          alt=""
+                      <div class="radioWrapper">
+                        <label for="brr1"
+                          ><button class="any no">1</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          value="1"
+                          id="brr1"
                         />
-                        <h5>Guest-house</h5>
                       </div>
-                    </button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="Guest-House"
-                    id="t4"
-                    name="proprtyType"
-                  />
-                </div>
-              </div>
-              <hr />
-              <div class="rooms-bed">
-                <div class="mb-2">
-                  <h5 class="form-label">BedRooms</h5>
+                      <div class="radioWrapper">
+                        <label for="brr2"
+                          ><button class="any no">2</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          value="2"
+                          id="brr2"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="brr3"
+                          ><button class="any no">3</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          id="brr3"
+                          value="3"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="brr4"
+                          ><button class="any no">4</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          value="4"
+                          id="brr4"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="brr5"
+                          ><button class="any no">5</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          value="5"
+                          value="6"
+                          id="brr5"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="brr6"
+                          ><button class="any no">6</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          id="brr6"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="brr7"
+                          ><button class="any no">7+</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="bedrooms"
+                          id="brr7"
+                          value="7"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-2">
+                    <h5 class="form-label">Beds</h5>
+                    <div class="btn-cnt">
+                      <div class="radioWrapper">
+                        <label for="br1"
+                          ><button class="any no">any</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br1"
+                          value="any"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="br2"
+                          ><button class="any no">1</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br2"
+                          value="1"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="br3"
+                          ><button class="any no">2</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br3"
+                          value="2"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="br4"
+                          ><button class="any no">3</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br4"
+                          value="3"
+                        />
+                      </div>
+
+                      <div class="radioWrapper">
+                        <label for="br5"
+                          ><button class="any no">4</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br5"
+                          value="4"
+                        />
+                      </div>
+
+                      <div class="radioWrapper">
+                        <label for="br6"
+                          ><button class="any no">5</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br6"
+                          value="5"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="br7"
+                          ><button class="any no">6</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br7"
+                          value="6"
+                        />
+                      </div>
+                      <div class="radioWrapper">
+                        <label for="br8"
+                          ><button class="any no">7+</button></label
+                        >
+                        <input
+                          style="display: none"
+                          type="radio"
+                          name="beds"
+                          id="br8"
+                          value="7"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <small>Floor</small>
                   <div class="btn-cnt">
                     <div class="radioWrapper">
-                      <label for="brr8"
+                      <label for="bfr1"
                         ><button class="any no">any</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
+                        name="floor"
+                        id="bfr1"
                         value="any"
-                        id="brr8"
-                        name="bedrooms"
                       />
                     </div>
                     <div class="radioWrapper">
-                      <label for="brr1"
+                      <label for="bfr2"
                         ><button class="any no">1</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
+                        name="floor"
+                        id="bfr2"
                         value="1"
-                        id="brr1"
                       />
                     </div>
                     <div class="radioWrapper">
-                      <label for="brr2"
+                      <label for="bfr3"
                         ><button class="any no">2</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
+                        name="floor"
+                        id="bfr3"
                         value="2"
-                        id="brr2"
                       />
                     </div>
                     <div class="radioWrapper">
-                      <label for="brr3"
+                      <label for="bfr4"
                         ><button class="any no">3</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
-                        id="brr3"
+                        name="floor"
+                        id="bfr4"
                         value="3"
                       />
                     </div>
+
                     <div class="radioWrapper">
-                      <label for="brr4"
+                      <label for="bfr5"
                         ><button class="any no">4</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
+                        name="floor"
+                        id="bfr5"
                         value="4"
-                        id="brr4"
                       />
                     </div>
+
                     <div class="radioWrapper">
-                      <label for="brr5"
+                      <label for="bfr6"
                         ><button class="any no">5</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
+                        name="floor"
+                        id="bfr6"
                         value="5"
-                        value="6"
-                        id="brr5"
                       />
                     </div>
                     <div class="radioWrapper">
-                      <label for="brr6"
+                      <label for="bfr7"
                         ><button class="any no">6</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="bedrooms"
-                        id="brr6"
-                      />
-                    </div>
-                    <div class="radioWrapper">
-                      <label for="brr7"
-                        ><button class="any no">7+</button></label
-                      >
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="bedrooms"
-                        id="brr7"
-                        value="7"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="mb-2">
-                  <h5 class="form-label">Beds</h5>
-                  <div class="btn-cnt">
-                    <div class="radioWrapper">
-                      <label for="br1"
-                        ><button class="any no">any</button></label
-                      >
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br1"
-                        value="any"
-                      />
-                    </div>
-                    <div class="radioWrapper">
-                      <label for="br2"><button class="any no">1</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br2"
-                        value="1"
-                      />
-                    </div>
-                    <div class="radioWrapper">
-                      <label for="br3"><button class="any no">2</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br3"
-                        value="2"
-                      />
-                    </div>
-                    <div class="radioWrapper">
-                      <label for="br4"><button class="any no">3</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br4"
-                        value="3"
-                      />
-                    </div>
-
-                    <div class="radioWrapper">
-                      <label for="br5"><button class="any no">4</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br5"
-                        value="4"
-                      />
-                    </div>
-
-                    <div class="radioWrapper">
-                      <label for="br6"><button class="any no">5</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br6"
-                        value="5"
-                      />
-                    </div>
-                    <div class="radioWrapper">
-                      <label for="br7"><button class="any no">6</button></label>
-                      <input
-                        style="display: none"
-                        type="radio"
-                        name="beds"
-                        id="br7"
+                        name="floor"
+                        id="bfr7"
                         value="6"
                       />
                     </div>
                     <div class="radioWrapper">
-                      <label for="br8"
+                      <label for="bfr8"
                         ><button class="any no">7+</button></label
                       >
                       <input
                         style="display: none"
                         type="radio"
-                        name="beds"
-                        id="br8"
+                        name="floor"
+                        id="bfr8"
                         value="7"
                       />
                     </div>
                   </div>
                 </div>
-                <small>Floor</small>
-                <div class="btn-cnt">
+                <hr />
+                <h2 class="heading">Ammenities</h2>
+                <div class="ammenities">
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="wifi"
+                      name="ammenities"
+                      value="Wifi"
+                    />
+                    <label for="wifi">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Wifi</label
+                    >
+                  </div>
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="kitchen"
+                      name="ammenities"
+                      value="kitchen"
+                    />
+                    <label for="kitchen">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Kitchen</label
+                    >
+                  </div>
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="wm"
+                      name="ammenities"
+                      value="Washing Machine"
+                    />
+                    <label for="wm">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Washing Machine</label
+                    >
+                  </div>
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="parking"
+                      name="ammenities"
+                      value="parking"
+                    />
+                    <label for="parking">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Parking</label
+                    >
+                  </div>
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="ac"
+                      name="ammenities"
+                      value="Air Conditioner"
+                    />
+                    <label for="ac">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Air Conditioner</label
+                    >
+                  </div>
+                  <div class="mb-2 checkBoxWrapper">
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="dw"
+                      name="ammenities"
+                      value="Dedicated Workspace"
+                    />
+                    <label for="dw">
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span>
+                      </span>
+                      Dedicated Workspace</label
+                    >
+                  </div>
+                </div>
+                <hr />
+                <div class="prpty-access">
+                  <div class="mb-2 checkBoxWrapper">
+                    <label class="form-label" for="accessibility"
+                      >Property Accessible for Specially-abled
+                      <span class="box">
+                        <span class="check">
+                          <i class="ri-check-line"></i>
+                        </span> </span
+                    ></label>
+                    <input
+                      style="display: none"
+                      type="checkbox"
+                      id="accessibility"
+                      name="accessibility"
+                      value="true"
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="furnished">
+                  <label class="form-label">Furnished Type</label>
                   <div class="radioWrapper">
-                    <label for="bfr1"
-                      ><button class="any no">any</button></label
+                    <label for="fur1"
+                      ><button class="any no">Fully Furnished</button></label
                     >
                     <input
                       style="display: none"
                       type="radio"
-                      name="floor"
-                      id="bfr1"
-                      value="any"
+                      value="Fully Furnished"
+                      id="fur1"
+                      name="furnished"
                     />
                   </div>
                   <div class="radioWrapper">
-                    <label for="bfr2"><button class="any no">1</button></label>
+                    <label for="fur2"
+                      ><button class="any no">Semi Furnished</button></label
+                    >
                     <input
                       style="display: none"
                       type="radio"
-                      name="floor"
-                      id="bfr2"
-                      value="1"
+                      value="Semi Furnished"
+                      id="fur2"
+                      name="furnished"
                     />
                   </div>
                   <div class="radioWrapper">
-                    <label for="bfr3"><button class="any no">2</button></label>
+                    <label for="fur3"
+                      ><button class="any no">Non Furnished</button></label
+                    >
                     <input
                       style="display: none"
                       type="radio"
-                      name="floor"
-                      id="bfr3"
-                      value="2"
-                    />
-                  </div>
-                  <div class="radioWrapper">
-                    <label for="bfr4"><button class="any no">3</button></label>
-                    <input
-                      style="display: none"
-                      type="radio"
-                      name="floor"
-                      id="bfr4"
-                      value="3"
-                    />
-                  </div>
-
-                  <div class="radioWrapper">
-                    <label for="bfr5"><button class="any no">4</button></label>
-                    <input
-                      style="display: none"
-                      type="radio"
-                      name="floor"
-                      id="bfr5"
-                      value="4"
-                    />
-                  </div>
-
-                  <div class="radioWrapper">
-                    <label for="bfr6"><button class="any no">5</button></label>
-                    <input
-                      style="display: none"
-                      type="radio"
-                      name="floor"
-                      id="bfr6"
-                      value="5"
-                    />
-                  </div>
-                  <div class="radioWrapper">
-                    <label for="bfr7"><button class="any no">6</button></label>
-                    <input
-                      style="display: none"
-                      type="radio"
-                      name="floor"
-                      id="bfr7"
-                      value="6"
-                    />
-                  </div>
-                  <div class="radioWrapper">
-                    <label for="bfr8"><button class="any no">7+</button></label>
-                    <input
-                      style="display: none"
-                      type="radio"
-                      name="floor"
-                      id="bfr8"
-                      value="7"
+                      value="Non Furnished"
+                      id="fur3"
+                      name="furnished"
                     />
                   </div>
                 </div>
               </div>
-              <hr />
-              <h2 class="heading">Ammenities</h2>
-              <div class="ammenities">
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="wifi"
-                    name="ammenities"
-                    value="Wifi"
-                  />
-                  <label for="wifi">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Wifi</label
-                  >
-                </div>
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="kitchen"
-                    name="ammenities"
-                    value="kitchen"
-                  />
-                  <label for="kitchen">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Kitchen</label
-                  >
-                </div>
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="wm"
-                    name="ammenities"
-                    value="Washing Machine"
-                  />
-                  <label for="wm">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Washing Machine</label
-                  >
-                </div>
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="parking"
-                    name="ammenities"
-                    value="parking"
-                  />
-                  <label for="parking">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Parking</label
-                  >
-                </div>
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="ac"
-                    name="ammenities"
-                    value="Air Conditioner"
-                  />
-                  <label for="ac">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Air Conditioner</label
-                  >
-                </div>
-                <div class="mb-2 checkBoxWrapper">
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="dw"
-                    name="ammenities"
-                    value="Dedicated Workspace"
-                  />
-                  <label for="dw">
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span>
-                    </span>
-                    Dedicated Workspace</label
-                  >
-                </div>
+              <div class="modal-footer mf justify-content-end">
+                <button type="submit" class="btn btn-dark col-12">
+                  Filter
+                </button>
               </div>
-              <hr />
-              <div class="prpty-desc">
-                <h2 class="heading">Property Description</h2>
-                <textarea
-                  class="col-12"
-                  name="propertyDescription"
-                  id=""
-                  rows="7"
-                  placeholder="Enter Fascinating facts about your property"
-                ></textarea>
-              </div>
-              <hr />
-              <div class="prpty-access">
-                <div class="mb-2 checkBoxWrapper">
-                  <label class="form-label" for="accessibility"
-                    >Property Accessible for Specially-abled
-                    <span class="box">
-                      <span class="check">
-                        <i class="ri-check-line"></i>
-                      </span> </span
-                  ></label>
-                  <input
-                    style="display: none"
-                    type="checkbox"
-                    id="accessibility"
-                    name="accessibility"
-                  />
-                </div>
-              </div>
-              <hr />
-              <div class="furnished">
-                <label class="form-label">Furnished Type</label>
-                <div class="radioWrapper">
-                  <label for="fur1"
-                    ><button class="any no">Fully Furnished</button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="Fully Furnished"
-                    id="fur1"
-                    name="furnished"
-                  />
-                </div>
-                <div class="radioWrapper">
-                  <label for="fur2"
-                    ><button class="any no">Semi Furnished</button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="Semi Furnished"
-                    id="fur2"
-                    name="furnished"
-                  />
-                </div>
-                <div class="radioWrapper">
-                  <label for="fur3"
-                    ><button class="any no">Non Furnished</button></label
-                  >
-                  <input
-                    style="display: none"
-                    type="radio"
-                    value="Non Furnished"
-                    id="fur3"
-                    name="furnished"
-                  />
-                </div>
-              </div>
-              <hr />
-              <div class="address">
-                <h2 class="heading">Property Address</h2>
-                <input
-                  class="col-12"
-                  name="propertyAddress"
-                  id=""
-                  placeholder="Enter Address"
-                />
-              </div>
-            </div>
-            <div class="modal-footer justify-content-end mf">
-              <button type="button" class="btn btn-outline-dark px-4"
-                >Find</button
-              >
-            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -714,5 +853,97 @@
       crossorigin="anonymous"
     ></script>
     <script src="../javascripts/moreCategorySection.js"></script>
+    <script>
+      function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, "#C6C6C6", "#25daa5", controlSlider);
+        if (from > to) {
+          fromSlider.value = to;
+          fromInput.value = to;
+        } else {
+          fromSlider.value = from;
+        }
+      }
+
+      function controlToInput(toSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, "#C6C6C6", "#25daa5", controlSlider);
+        setToggleAccessible(toInput);
+        if (from <= to) {
+          toSlider.value = to;
+          toInput.value = to;
+        } else {
+          toInput.value = from;
+        }
+      }
+
+      function controlFromSlider(fromSlider, toSlider, fromInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+        if (from > to) {
+          fromSlider.value = to;
+          fromInput.value = to;
+        } else {
+          fromInput.value = from;
+        }
+      }
+
+      function controlToSlider(fromSlider, toSlider, toInput) {
+        const [from, to] = getParsed(fromSlider, toSlider);
+        fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+        setToggleAccessible(toSlider);
+        if (from <= to) {
+          toSlider.value = to;
+          toInput.value = to;
+        } else {
+          toInput.value = from;
+          toSlider.value = from;
+        }
+      }
+
+      function getParsed(currentFrom, currentTo) {
+        const from = parseInt(currentFrom.value, 10);
+        const to = parseInt(currentTo.value, 10);
+        return [from, to];
+      }
+
+      function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
+        const rangeDistance = to.max - to.min;
+        const fromPosition = from.value - to.min;
+        const toPosition = to.value - to.min;
+        controlSlider.style.background = `linear-gradient(
+        to right,
+        ${sliderColor} 0%,
+        ${sliderColor} ${(fromPosition / rangeDistance) * 100}%,
+        ${rangeColor} ${(fromPosition / rangeDistance) * 100}%,
+        ${rangeColor} ${(toPosition / rangeDistance) * 100}%, 
+        ${sliderColor} ${(toPosition / rangeDistance) * 100}%, 
+        ${sliderColor} 100%)`;
+      }
+
+      function setToggleAccessible(currentTarget) {
+        const toSlider = document.querySelector("#toSlider");
+        if (Number(currentTarget.value) <= 0) {
+          toSlider.style.zIndex = 2;
+        } else {
+          toSlider.style.zIndex = 0;
+        }
+      }
+
+      const fromSlider = document.querySelector("#fromSlider");
+      const toSlider = document.querySelector("#toSlider");
+      const fromInput = document.querySelector("#fromInput");
+      const toInput = document.querySelector("#toInput");
+      fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+      setToggleAccessible(toSlider);
+
+      fromSlider.oninput = () =>
+        controlFromSlider(fromSlider, toSlider, fromInput);
+      toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
+      fromInput.oninput = () =>
+        controlFromInput(fromSlider, fromInput, toInput, toSlider);
+      toInput.oninput = () =>
+        controlToInput(toSlider, fromInput, toInput, toSlider);
+    </script>
   </body>
 </html>

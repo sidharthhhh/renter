@@ -13,6 +13,10 @@ document.querySelector('#menuToggle').addEventListener('click', (event) => {
     document.querySelector('#menu').style.right = `0px`
     document.querySelector('#menu').style.left = `0px`
     textAnt.textillate('in')
+    document.querySelectorAll('.menuButtons a').forEach((elm) => {
+      elm.classList.remove('btn-outline-dark')
+      elm.classList.add('btn-outline-light')
+    })
   } else {
     textAnt.textillate('out')
     document.querySelector('#menuToggle').classList.add('ri-menu-line')
@@ -21,6 +25,10 @@ document.querySelector('#menuToggle').addEventListener('click', (event) => {
       document.querySelector('#menuToggle').style.color = '#000'
       document.querySelector('#menu').style.right = `${window.innerWidth}px`
       document.querySelector('#menu').style.left = `-${window.innerWidth}px`
+      document.querySelectorAll('.menuButtons a').forEach((elm) => {
+        elm.classList.add('btn-outline-dark')
+        elm.classList.remove('btn-outline-light')
+      })
     }, 700)
   }
   toggleFlag = !toggleFlag
