@@ -21,12 +21,22 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <link rel="stylesheet" href="../stylesheets/style.css" />
     <link rel="stylesheet" href="../stylesheets/properties.css" />
+    <link rel="stylesheet" href="../stylesheets/footer.css" />
   </head>
   <body>
     <div class="main">
-      <div class="header_section">
-        <h1>Jannat 100% PetFriendly Pool villa with LakeView</h1>
+      <div class="header_section pt-4">
+        <!-- <h1>Jannat 100% PetFriendly Pool villa with LakeView</h1> -->
         <div class="sub_header_section">
           <div class="part1">
             <h3><i class="ri-star-fill"></i> 5.0</h3>
@@ -46,12 +56,10 @@
       <div class="content">
         <div class="left_section">
           <div class="metaRent">
-            <!-- <h2>The Selby</h2> -->
             <h3>695 Merrick Ave, Westbury, NY 11590</h3>
-            <h4><a href="#">www.renters.com</a></h4>
             <div class="left_sub_content">
               <div class="rent">
-                <h1>$4,450 - $8,900</h1>
+                <h1>$4,450</h1>
                 <h4>Monthly Rent</h4>
               </div>
               <div class="bed">
@@ -201,14 +209,21 @@
           </div>
 
           <div class="line"></div>
-        </div>
+          <section>
+            <h2>Location on map</h2>
+            <div id="map"></div>
+          </section>
+          <div class="line"></div>
 
-        <div class="right_section"></div>
+          <!-- Footer here -->
+          <%- include('./components/footer.ejs') %>
+          <!-- Footer here -->
+        </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.js"></script>
     <!-- Initialize Swiper -->
     <script>
       var swiper = new Swiper(".mySwiper", {
@@ -224,6 +239,111 @@
           prevEl: ".swiper-button-prev",
         },
       });
+    </script>
+    <script>
+      // This Code is HandWritten By Aayush Chouhan {After Learning Tha ChatGPT is just for help it cant code for real}
+      const mbUrl =
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+      const streets = L.tileLayer(mbUrl, {
+        id: "mapbox/streets-v11",
+        tileSize: 512,
+        zoomOffset: -1,
+      });
+      const satellite = L.tileLayer(mbUrl, {
+        id: "mapbox/satellite-v9",
+        tileSize: 512,
+        zoomOffset: -1,
+        maxZoom: 17,
+      });
+      const buldings = L.layerGroup();
+      const houses = L.layerGroup();
+      const map = L.map("map", {
+        attributionControl: false,
+        center: [23.197572, 77.456996],
+        zoom: 13,
+        layers: [streets, buldings],
+      });
+
+      const baseLayers = {
+        Streets: streets,
+        Satellite: satellite,
+      };
+
+      var bulding = [
+        {
+          lat: 23.197572,
+          lon: 77.456996,
+          name: "Ankur Property",
+          info: "This is a beautiful property of Ankur.",
+        },
+        {
+          lat: 23.20099,
+          lon: 77.457773,
+          name: "Aayush Property",
+          info: "This is a beautiful property of Aayush.",
+        },
+        {
+          lat: 23.201591,
+          lon: 77.461389,
+          name: "SJ Property",
+          info: "This is a beautiful property of SJ.",
+        },
+      ];
+
+      bulding.forEach((b) => {
+        const marker = L.marker([b.lat, b.lon], {
+          icon: L.divIcon({
+            className: "bulding",
+          }),
+        })
+          .bindPopup("<b>" + b.name + "</b><br>" + b.info)
+          .addTo(buldings);
+      });
+
+      var house = [
+        {
+          lat: 23.202038,
+          lon: 77.453688,
+          name: "Techno Ka Gharg",
+          info: "16 tb ram and 128pb storage",
+        },
+        {
+          lat: 23.198433,
+          lon: 77.443759,
+          name: "Rehbar ka zGhar",
+          info: "3bhk with balconey an swiming pool",
+        },
+        {
+          lat: 23.192296,
+          lon: 77.443638,
+          name: "New York Property",
+          info: "Just Dreaming New York.",
+        },
+      ];
+
+      house.forEach((h) => {
+        const marker = L.marker([h.lat, h.lon], {
+          icon: L.divIcon({
+            className: "house",
+          }),
+        })
+          .bindPopup("<b>" + h.name + "</b><br>" + h.info)
+          .addTo(houses);
+      });
+
+      const overlays = {
+        Buldings: buldings,
+        Houses: houses,
+      };
+
+      const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+      // Method 2 of adding
+      // const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
+      // const rubyHill = L.marker([39.68, -105.00]).bindPopup('This is Ruby Hill Park.');
+      // const parks = L.layerGroup([crownHill, rubyHill]);
+
+      // layerControl.addOverlay(parks, 'Parks');
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>

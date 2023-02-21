@@ -12,11 +12,6 @@ passport.use(new localStrategy(userModel.authenticate()))
 const UserImageUpload = multer({ storage: config.UserImageStorage })
 const ProductImageUpload = multer({ storage: config.ProductImageStorage })
 
-// router.get('/', function(req, res, next) {
-//   var details = {username:"", profilepic:""};
-//   res.render('index' , details);
-// });
-
 //index page
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
@@ -54,15 +49,6 @@ router.get('/login', function (req, res, next) {
   res.render('login')
 })
 
-// router.get('/success' , function(req,res,next){
-//   res.send("login successfully");
-// })
-// router.post('/success' , isLoggedIn, async function(req,res){
-//   var user = await userModel.findOne({username: req.session.passport.user});
-//   var details = {username: user.username , profilepic:user.profileImg};
-//   res.render('index' , details);
-// })
-
 router.post(
   '/login',
   passport.authenticate('local', {
@@ -89,10 +75,6 @@ router.get('/logout', function (req, res, next) {
   })
 })
 
-router.get('/contact', function (req, res, next) {
-  res.render('contact', { title: 'Express' })
-})
-
 //there will be a option to see profile page
 var ignore = ['properties']
 router.get('/profile', isLoggedIn, async function (req, res) {
@@ -108,12 +90,6 @@ router.get('/profile', isLoggedIn, async function (req, res) {
   res.render('profile', { data: user, verified: verified })
   // res.render('profile', { verified: verified })
 })
-
-//on the profile page there will be a button to verify your account
-// router.get('/verify', isLoggedIn, async function (req, res) {
-//   var user = await userModel.findOne({ username: req.session.passport.user })
-//   res.render('verify', { data: user })
-// })
 
 //here user will enter all his details, upload profile pic and after verifying will again go back to profile page
 router.post(
@@ -141,28 +117,13 @@ router.post(
   },
 )
 
-//to find products: for first page show first 6 elements
-router.get('/find/properties', async function (req, res) {
-  var properties = await propertiesModel.find().limit(6)
-  res.send(properties)
-})
-
-//to find products on the basis of on which page u are
-router.get('/find/properties/:pageno', async function (req, res) {
-  var properties = await propertiesModel
-    .find()
-    .skip(req.params.pageno * 6)
-    .limit(6)
-  res.send(properties)
-})
-
-//to upload property
+// creating properties here
 router.post(
-  '/upload/property',
+  '/upload/properties',
   isLoggedIn,
   ProductImageUpload.array('images', 4),
   async function (req, res) {
-    var user = userModel.findOne({ username: req.session.passport.user })
+    var user = await userModel.findOne({ username: req.user.username })
     var data = {
       ownerId: user._id,
       propertyDescription: req.body.propertyDescription,
@@ -181,38 +142,64 @@ router.post(
       pics: req.files.map((elem) => elem.filename),
     }
     var property = await propertiesModel.create(data)
-    user.properties.push(property)
+    user.properties.push(property._id)
     await user.save()
-    // res.send("You have succesfully uploaded your property");
+    res.redirect('/profile')
+  },
+)
+// creating properties here
+
+//to find products on the basis of on which page u are
+router.get('/find/properties/:pageno', async function (req, res) {
+  var properties = await propertiesModel
+    .find()
+    .skip(req.params.pageno * 6)
+    .limit(6)
+  res.send(properties)
+})
+
+//to upload property
+router.post(
+  '/upload/properties',
+  isLoggedIn,
+  ProductImageUpload.array('images', 4),
+  async function (req, res) {
+    var user = await userModel.findOne({ username: req.user.username })
+    var data = {
+      ownerId: user._id,
+      propertyDescription: req.body.propertyDescription,
+      propertyAddress: req.body.propertyAddress,
+      // LatitudeAndLongitude:{latitude:"", longitude:""},
+      price: parseInt(req.body.price.replace(/,/g, ''), 10),
+      addOnAmenities: req.body.ammenities || [],
+      propertyType: req.body.proprtyType,
+      accessibility: req.body.accessibility,
+      furnishedType: req.body.furnished,
+      houseRules: req.body.houseRules,
+      bedrooms: req.body.bedrooms,
+      beds: req.body.beds,
+      floor: req.body.floor,
+      status: req.body.status,
+      pics: req.files.map((elem) => elem.filename),
+    }
+    var property = await propertiesModel.create(data)
+    user.properties.push(property._id)
+    await user.save()
     res.redirect('/profile')
   },
 )
 
 //to display upload/property form
-router.get('/upload/property', function (req, res) {
+router.get('/upload/property', isLoggedIn, function (req, res) {
   res.render('property')
 })
 
-//on click of room filter finding property on the basis of no. of rooms
-router.get('/filter/property/:roomno', async function (req, res) {
-  var rooms = req.params.roomno
-  var properties = await propertiesModel.find({ bedrooms: rooms })
+//to show properties on index page
+router.get('/show/properties', async function (req, res) {
+  var properties = await propertiesModel.find().limit(8)
   res.send(properties)
-  res.send(rooms)
 })
 
-//on click of room filter finding property on the basis of price range
-router.get('/filter/property/:minprice/:maxprice', async function (req, res) {
-  var minprice = req.params.minprice
-  var maxprice = req.params.maxprice
-  var properties = await propertiesModel.find({
-    price: { $gt: minprice - 1, $lt: maxprice + 1 },
-  })
-  res.send(properties)
-})
-router.get('/aboutus', (req, res, next) => {
-  res.render('aboutus')
-})
 //on click of room filter finding property on the basis of no. of rooms
 // router.get('/filter/property/:roomno' , async function(req,res){
 //   var rooms = req.params.roomno;
@@ -227,5 +214,29 @@ router.get('/aboutus', (req, res, next) => {
 //     var properties = await propertiesModel.find({price:{$gt: minprice-1, $lt: maxprice+1}});
 //     res.send(properties);
 // })
+
+router.post('/search/address', async function (req, res) {
+  async function searchPropertiesByAddress(address) {
+    const pipeline = [
+      { $match: { $text: { $search: address } } },
+      { $sort: { score: { $meta: 'textScore' } } },
+      { $limit: 8 },
+      {
+        $project: {
+          _id: 1,
+          address: 1,
+          price: 1,
+          bedrooms: 1,
+          bathrooms: 1,
+          sqft: 1,
+        },
+      },
+    ]
+
+    const results = await propertiesModel.aggregate(pipeline).toArray()
+
+    return results
+  }
+})
 
 module.exports = router

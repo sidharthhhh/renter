@@ -11,8 +11,18 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../stylesheets/profile.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheets/categorySection.css" />
+    <link rel="stylesheet" href="../stylesheets/moreCategorySection.css" />
+    <link rel="stylesheet" href="../stylesheets/navbar.css" />
+    <link rel="stylesheet" href="../stylesheets/subHero.css" />
+    <link rel="stylesheet" href="../stylesheets/textSection.css" />
     <link rel="stylesheet" href="../stylesheets/property.css" />
+    <link rel="stylesheet" href="../stylesheets/searchSection.css" />
+    <link rel="stylesheet" href="../stylesheets/footer.css" />
   </head>
   <body>
     <div class="card">
@@ -28,7 +38,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <form
-              action="/upload/property"
+              action="/upload/properties"
               method="post"
               enctype="multipart/form-data"
             >
@@ -577,6 +587,7 @@
                       type="checkbox"
                       id="accessibility"
                       name="accessibility"
+                      value="true"
                     />
                   </div>
                 </div>
@@ -642,6 +653,7 @@
                       class="form-control"
                       id="images"
                       accept="image/*"
+                      name="images"
                     />
                   </div>
                 </div>
@@ -657,11 +669,17 @@
       </div>
     </div>
     <div id="main">
+      <!-- navBar -->
+      <%- include('./components/index/navbar.ejs') %>
+      <!-- navBar -->
       <% if(!verified){%>
-        <div class="p-3 bg-danger border border-danger-subtle rounded-3 d-flex justify-content-between"
-        style="color:#dadada">
+      <div
+        class="p-3 bg-danger border border-danger-subtle rounded-3 d-flex justify-content-between"
+        style="color: #dadada"
+      >
         <div>
-          You have not verified your account. Verify it below to list your properties 
+          You have not verified your account. Verify it below to list your
+          properties
         </div>
       </div>
       <%} %>
@@ -673,17 +691,15 @@
               ><img
                 class="rounded-circle mt-5"
                 width="150px"
-                height='150px'
-                style='object-fit: cover;'
-                <% if(data.profileImg){ %>
-                  src = "../images/uploads/userImages/<%= data.profileImg %>"
-                <% } else{%>
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                <% } %>
-                />
-                <span
-                class="font-weight-bold"
-                ><%= data.name %> </span>
+                height="150px"
+                style="object-fit: cover"
+                <% if(data.profileImg){%>
+
+              src = "../images/uploads/userImages/<%= data.profileImg %>" <% }
+              else{%>
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+              <% } %> />
+              <span class="font-weight-bold"><%= data.name %> </span>
               <span class="text-black-50"><%= data.username %></span>
               <span> </span>
             </div>
@@ -700,7 +716,8 @@
             <div class="p-3 py-1">
               <div
                 class="d-flex justify-content-between align-items-center experience"
-                ><span>Add new property</span><button
+                ><span>Add new property</span
+                ><button
                   type="button"
                   class="btn btn-outline-dark"
                   data-bs-toggle="modal"
@@ -711,43 +728,43 @@
               ><br />
             </div>
             <form action="/verify" method="post" enctype="multipart/form-data">
-            <div class="p-3 py-2">
-              <div
-                class="d-flex justify-content-between align-items-center mb-1"
-              >
-                <h4 class="text-right">Profile Settings</h4>
-              </div>
-              <div class="row mt-2">
+              <div class="p-3 py-2">
                 <div
-                  ><label class="labels">Name</label
-                  ><input
-                    type="text"
-                    class="form-control"
-                    placeholder="first name"
-                    value="<%= data.name %>"
-                    name = "name"
-                /></div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-12"
-                  ><label class="labels">Mobile Number</label
-                  ><input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter phone number"
-                    value="<%= data.contact %>"
-                    name = "contact"
-                /></div>
-                <div class="col-md-12"
-                  ><label class="labels">Address Line 1</label
-                  ><input
-                    type="text"
-                    class="form-control"
-                    placeholder="enter address line 1"
-                    value="<%= data.address %>"
-                    name = "address"
-                /></div>
-                <!-- <div class="col-md-12"
+                  class="d-flex justify-content-between align-items-center mb-1"
+                >
+                  <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                  <div
+                    ><label class="labels">Name</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="first name"
+                      value="<%= data.name %>"
+                      name="name"
+                  /></div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12"
+                    ><label class="labels">Mobile Number</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="enter phone number"
+                      value="<%= data.contact %>"
+                      name="contact"
+                  /></div>
+                  <div class="col-md-12"
+                    ><label class="labels">Address Line 1</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="enter address line 1"
+                      value="<%= data.address %>"
+                      name="address"
+                  /></div>
+                  <!-- <div class="col-md-12"
                   ><label class="labels">Email ID</label
                   ><input
                     type="text"
@@ -755,37 +772,43 @@
                     placeholder="enter email id"
                     value=""
                 /></div> -->
-                <div class="mb-3">
-                  <label for="formFileSm" class="form-label labels">Profile Pic</label>
-                  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image">
+                  <div class="mb-3">
+                    <label for="formFileSm" class="form-label labels"
+                      >Profile Pic</label
+                    >
+                    <input
+                      class="form-control form-control-sm"
+                      id="formFileSm"
+                      type="file"
+                      name="image"
+                    />
+                  </div>
+                  <div class="col-md-6"
+                    ><label class="labels">ID Proof Type</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="Aadhar Card"
+                      value="<%= data.idProof.idType %>"
+                      name="idType"
+                  /></div>
+                  <div class="col-md-6"
+                    ><label class="labels">ID Proof Number</label
+                    ><input
+                      type="text"
+                      class="form-control"
+                      placeholder="Aadhar Card Number"
+                      value="<%= data.idProof.idNumber %>"
+                      name="idNumber"
+                  /></div>
                 </div>
-                <div class="col-md-6"
-                ><label class="labels">ID Proof Type</label
-                ><input
-                  type="text"
-                  class="form-control"
-                  placeholder="Aadhar Card"
-                  value="<%= data.idProof.idType %>"
-                  name="idType"
-              /></div>
-              <div class="col-md-6"
-              ><label class="labels">ID Proof Number</label
-              ><input
-                type="text"
-                class="form-control"
-                placeholder="Aadhar Card Number"
-                value="<%= data.idProof.idNumber %>"
-                name = "idNumber"
-            /></div>
-              
+                <div class="mt-4 text-end"
+                  ><button class="btn btn-outline-dark" type="submit"
+                    >Save Profile</button
+                  ></div
+                >
               </div>
-              <div class="mt-4 text-end"
-                ><button class="btn btn-outline-dark" type="submit"
-                  >Save Profile</button
-                ></div
-              >
-            </div>
-          </form>
+            </form>
           </div>
         </div>
       </div>
@@ -796,6 +819,41 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"
+      integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"
+      integrity="sha512-YzMW3OzvgtVpIIPPpjnCy8wVTq5slHRrxnLH1oD5dkVjZf8+8DJYd+GYmmWXZNmroTqKXFFzFS3XZ/LBvaNgZg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js"
+      integrity="sha512-VJ/iYbiu1eJ6yLimfTi65t2R9TFcG5D9X8ZCfbbEFhTfPnKJh8byoKXEawi5ScJZBYL1eiirL1+MczZDx0Tz9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/textillate/0.4.0/jquery.textillate.min.js"
+      integrity="sha512-0bHMhYsdpiur1bT84kDH4D7cpxFQ9O7uA5yxVAqWC87h552Xt0swX4M+ZlXMKE8oPVRIJ5lAwXWO2UWeDwJJOw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="../javascripts/categorySection.js"></script>
+    <script src="../javascripts/textSection.js"></script>
     <script src="../javascripts/propertyCreate.js"></script>
+    <script src="../javascripts/navbar.js"></script>
   </body>
 </html>
