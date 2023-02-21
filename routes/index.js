@@ -95,7 +95,7 @@ router.get('/contact', function (req, res, next) {
 
 //there will be a option to see profile page
 var ignore = ['properties']
-router.get('/profile',isLoggedIn, async function (req, res) {
+router.get('/profile', isLoggedIn, async function (req, res) {
   var verified = true
   var user = await userModel.findOne({ username: req.session.passport.user })
   var ans = user.toJSON()
@@ -157,7 +157,6 @@ router.get('/find/properties/:pageno', async function (req, res) {
 })
 
 //to upload property
-<<<<<<< HEAD
 router.post(
   '/upload/property',
   isLoggedIn,
@@ -169,7 +168,7 @@ router.post(
       propertyDescription: req.body.propertyDescription,
       propertyAddress: req.body.propertyAddress,
       // LatitudeAndLongitude:{latitude:"", longitude:""},
-      price: req.body.price,
+      price: parseInt(req.body.price.replace(/,/g, ''), 10),
       addOnAmenities: req.body.ammenities || [],
       propertyType: req.body.proprtyType,
       accessibility: req.body.accessibility,
@@ -181,43 +180,19 @@ router.post(
       status: req.body.status,
       pics: req.files.map((elem) => elem.filename),
     }
-    await propertiesModel.create(data)
+    var property = await propertiesModel.create(data)
+    user.properties.push(property)
+    await user.save()
     // res.send("You have succesfully uploaded your property");
     res.redirect('/profile')
   },
 )
-=======
-router.post('/upload/property' , isLoggedIn,ProductImageUpload.array('images',4), async function(req,res){
-  var user = userModel.findOne({username: req.session.passport.user});
-  var data={
-    ownerId: user._id,
-    propertyDescription: req.body.propertyDescription,
-    propertyAddress: req.body.propertyAddress,
-    // LatitudeAndLongitude:{latitude:"", longitude:""},
-    price:parseInt(req.body.price.replace(/,/g, ''), 10),
-    addOnAmenities:req.body.ammenities||[],
-    propertyType:req.body.proprtyType,
-    accessibility:req.body.accessibility,
-    furnishedType:req.body.furnished,
-    houseRules:req.body.houseRules,
-    bedrooms:req.body.bedrooms,
-    beds:req.body.beds,
-    floor:req.body.floor,
-    status:req.body.status,
-    pics:req.files.map(elem=>elem.filename)
-  }
-  var property =  await propertiesModel.create(data);
-  user.properties.push(property);
-  await user.save();
-  // res.send("You have succesfully uploaded your property");
- res.redirect('/profile')
-})
->>>>>>> 22c6d262d20753828a1c86e9b21e9ab66e33f4a0
 
 //to display upload/property form
 router.get('/upload/property', function (req, res) {
   res.render('property')
 })
+
 //on click of room filter finding property on the basis of no. of rooms
 router.get('/filter/property/:roomno', async function (req, res) {
   var rooms = req.params.roomno
@@ -235,12 +210,9 @@ router.get('/filter/property/:minprice/:maxprice', async function (req, res) {
   })
   res.send(properties)
 })
-
-//to display upload/property form
-router.get('/upload/property' , isLoggedIn, function(req,res){
-  res.render("property");
-});
-
+router.get('/aboutus', (req, res, next) => {
+  res.render('aboutus')
+})
 //on click of room filter finding property on the basis of no. of rooms
 // router.get('/filter/property/:roomno' , async function(req,res){
 //   var rooms = req.params.roomno;

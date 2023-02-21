@@ -28,7 +28,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <form
-              action="/upload/properties"
+              action="/upload/property"
               method="post"
               enctype="multipart/form-data"
             >
@@ -661,8 +661,7 @@
         <div class="p-3 bg-danger border border-danger-subtle rounded-3 d-flex justify-content-between"
         style="color:#dadada">
         <div>
-          You have not verified your account. Verify it below to access premium
-          services.
+          You have not verified your account. Verify it below to list your properties 
         </div>
       </div>
       <%} %>
@@ -674,6 +673,8 @@
               ><img
                 class="rounded-circle mt-5"
                 width="150px"
+                height='150px'
+                style='object-fit: cover;'
                 <% if(data.profileImg){ %>
                   src = "../images/uploads/userImages/<%= data.profileImg %>"
                 <% } else{%>
