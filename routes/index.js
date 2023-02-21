@@ -95,25 +95,25 @@ router.get('/contact', function (req, res, next) {
 
 //there will be a option to see profile page
 var ignore = ['properties']
-router.get('/profile', async function (req, res) {
+router.get('/profile',isLoggedIn, async function (req, res) {
   var verified = true
-  // var user = await userModel.findOne({ username: req.session.passport.user })
-  // var ans = user.toJSON()
-  // for (let prop in ans) {
-  //   if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
-  //     verified = false
-  //   }
-  // }
+  var user = await userModel.findOne({ username: req.session.passport.user })
+  var ans = user.toJSON()
+  for (let prop in ans) {
+    if (ignore.indexOf(prop) === -1 && ans[prop].length === 0) {
+      verified = false
+    }
+  }
   console.log(verified)
-  // res.render('profile', { data: user, verified: verified })
-  res.render('profile', { verified: verified })
+  res.render('profile', { data: user, verified: verified })
+  // res.render('profile', { verified: verified })
 })
 
 //on the profile page there will be a button to verify your account
-router.get('/verify', isLoggedIn, async function (req, res) {
-  var user = await userModel.findOne({ username: req.session.passport.user })
-  res.render('verify', { data: user })
-})
+// router.get('/verify', isLoggedIn, async function (req, res) {
+//   var user = await userModel.findOne({ username: req.session.passport.user })
+//   res.render('verify', { data: user })
+// })
 
 //here user will enter all his details, upload profile pic and after verifying will again go back to profile page
 router.post(
@@ -159,7 +159,7 @@ router.post('/upload/property' , isLoggedIn,ProductImageUpload.array('images',4)
     propertyDescription: req.body.propertyDescription,
     propertyAddress: req.body.propertyAddress,
     // LatitudeAndLongitude:{latitude:"", longitude:""},
-    price:req.body.price,
+    price:parseInt(req.body.price.replace(/,/g, ''), 10),
     addOnAmenities:req.body.ammenities||[],
     propertyType:req.body.proprtyType,
     accessibility:req.body.accessibility,
@@ -171,7 +171,9 @@ router.post('/upload/property' , isLoggedIn,ProductImageUpload.array('images',4)
     status:req.body.status,
     pics:req.files.map(elem=>elem.filename)
   }
-  await propertiesModel.create(data);
+  var property =  await propertiesModel.create(data);
+  user.properties.push(property);
+  await user.save();
   // res.send("You have succesfully uploaded your property");
  res.redirect('/profile')
 })
@@ -195,5 +197,25 @@ router.get('/filter/property/:minprice/:maxprice', async function(req,res){
     var properties = await propertiesModel.find({price:{$gt: minprice-1, $lt: maxprice+1}});
     res.send(properties);
 })
+
+//to display upload/property form
+router.get('/upload/property' , isLoggedIn, function(req,res){
+  res.render("property");
+});
+
+//on click of room filter finding property on the basis of no. of rooms
+// router.get('/filter/property/:roomno' , async function(req,res){
+//   var rooms = req.params.roomno;
+//   var properties = await propertiesModel.find({bedrooms: rooms});
+//   res.send(properties); res.send(rooms);
+// })
+
+// //on click of room filter finding property on the basis of price range
+// router.get('/filter/property/:minprice/:maxprice', async function(req,res){
+//     var minprice = req.params.minprice;
+//     var maxprice = req.params.maxprice;
+//     var properties = await propertiesModel.find({price:{$gt: minprice-1, $lt: maxprice+1}});
+//     res.send(properties);
+// })
 
 module.exports = router
