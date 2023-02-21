@@ -293,7 +293,8 @@ i {
 .subcontent4 {
   width: 100%;
   height: fit-content;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
 }
 .content_part41 {

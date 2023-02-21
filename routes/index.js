@@ -362,7 +362,14 @@ router.post('/properties', async (req, res, next) => {
       return obj1._id.equals(obj2._id)
     })
   })
+  console.log(commonObjects)
   res.render('properties', { properties: commonObjects })
 })
-
+// showing single property by id
+router.get('/property/:propertyId', async function (req, res) {
+  var property = await propertiesModel
+    .findOne({ _id: req.params.propertyId })
+    .populate('ownerId')
+  res.render('property', { property: property })
+})
 module.exports = router
