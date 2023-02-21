@@ -7,7 +7,7 @@ document.querySelectorAll('.textSection').forEach((elem) => {
   gsap.to(elem, {
     scrollTrigger: {
       trigger: '.textSection',
-      start: 'top 10%',
+      start: 'top 40%',
       scrub: true,
     },
     onStart: () => {
@@ -18,3 +18,4 @@ document.querySelectorAll('.textSection').forEach((elem) => {
     },
   })
 })
+ 

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Add 3D terrain to a map</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    #menu {
+      z-index: 1;
+    }
+    #map {
+      z-index: -9;
+      position: absolute;
+      height: 500px;
+      width: 700px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="menu">
+    <input id="satellite-streets-v12" type="radio" name="rtoggle" value="satellite" checked="checked">
+    <label for="satellite-streets-v12">satellite streets</label>
+    <input id="light-v11" type="radio" name="rtoggle" value="light">
+    <label for="light-v11">light</label>
+    <input id="dark-v11" type="radio" name="rtoggle" value="dark">
+    <label for="dark-v11">dark</label>
+    <input id="streets-v12" type="radio" name="rtoggle" value="streets">
+    <label for="streets-v12">streets</label>
+    <input id="outdoors-v12" type="radio" name="rtoggle" value="outdoors">
+    <label for="outdoors-v12">outdoors</label>
+    </div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWF5dXNoY2hvdWhhbjI0IiwiYSI6ImNsZWJzZG1oaDBiaHQzcWxnbXBuamVrZHoifQ.nxj_Ce_J9zIBuZ4bQ1LXeQ';
+    
+    const map = new mapboxgl.Map({
+      container: 'map',
+      zoom: 14,
+      center: [-77.034084142948, 38.909671288923],
+      pitch: 80,
+      bearing: 41,
+      style: 'mapbox://styles/mapbox/satellite-streets-v12'
+    });
+
+    // map.on('style.load', () => {
+    //   map.addSource('mapbox-dem', {
+    //     'type': 'raster-dem',
+    //     'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+    //     'tileSize': 512,
+    //     'maxzoom': 14
+    //   });
+    //   map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+    // });
+
+    map.addControl(new mapboxgl.FullscreenControl());
+    // map.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: mapboxgl.accessToken,
+    //     mapboxgl: mapboxgl
+    //   })
+    // );
+    var properties = [
+      {
+        name: 'Cozy Cottage',
+        location: [-77.034084142948, 38.909671288923],
+        type: 'house',
+        info: 'A small but cozy cottage in the heart of the city.'
+      },
+      {
+        name: 'Spacious Apartment',
+        location: [-77.049766, 38.900772],
+        type: 'apartment',
+        info: 'A spacious apartment with a great view of the city.'
+      },
+      {
+        name: 'Charming House',
+        location: [-77.056680, 38.914480],
+        type: 'house',
+        info: 'A charming house with a lovely garden in a quiet neighborhood.'
+      },
+      {
+        name: 'Luxury Penthouse',
+        location: [-77.041706, 38.909515],
+        type: 'apartment',
+        info: 'A luxurious penthouse in the heart of the city with a rooftop pool.'
+      }
+    ];
+
+    properties.forEach(function (property) {
+      var el = document.createElement('div');
+      el.className = 'marker';
+      el.style.backgroundImage = 'url(https://img.icons8.com/color/48/000000/home--v3.png)';
+      el.style.width = '30px';
+      el.style.height = '30px';
+
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(property.info);
+
+      new mapboxgl.Marker(el)
+        .setLngLat(property.location)
+        .setPopup(popup)
+        .addTo(map);
+    });
+  </script>
+</body>
+
+</html>
