@@ -1,4 +1,5 @@
 nodemon.json
 node_modules
 webpack.config.js
-images
+productImages/*
+userImages/*

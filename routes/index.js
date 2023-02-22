@@ -346,7 +346,10 @@ router.post('/properties', async (req, res, next) => {
   }
   var ans = new Array()
   var add = await propertiesModel
-    .find({ $text: { $search: '88' } }, { score: { $meta: 'textScore' } })
+    .find(
+      { $text: { $search: `${req.body.address}` } },
+      { score: { $meta: 'textScore' } },
+    )
     .sort({ score: { $meta: 'textScore' } })
     .limit(8)
 
@@ -372,4 +375,11 @@ router.get('/property/:propertyId', async function (req, res) {
     .populate('ownerId')
   res.render('property', { property: property })
 })
+
+// about us page
+router.get('/about', (req, res, next) => {
+  res.render('aboutus')
+})
+// about us page
+
 module.exports = router
